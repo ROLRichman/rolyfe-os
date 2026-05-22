@@ -1,1 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RO'Lyfe Option Ladder</title>
 
+<script src="https://s3.tradingview.com/tv.js"></script>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif
+}
+
+body{
+background:#050816;
+color:#fff;
+padding:20px;
+}
+
+.container{
+max-width:1450px;
+margin:auto;
+}
+
+.hero{
+background:linear-gradient(135deg,#0d1b2a,#111827,#1f2937);
+padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+border:1px solid rgba(255,255,255,.08);
+box-shadow:0 0 30px rgba(0,0,0,.4);
+}
+
+.hero h1{
+font-size:34px;
+margin-bottom:10px;
+color:#00e5ff;
+}
+
+.hero p{
+opacity:.85;
+line-height:1.6;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.card{
+background:#111827;
+padding:20px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
+margin-bottom:20px;
+}
+
+.card h2{
+margin-bottom:18px;
+color:#00ff9d;
+}
+
+label{
+display:block;
+margin-top:14px;
+margin-bottom:6px;
+font-size:14px;
+opacity:.85;
+}
+
+input,select{
+width:100%;
+padding:14px;
+border-radius:12px;
+border:none;
+background:#1f2937;
+color:#fff;
+font-size:15px;
+}
+
+button{
+width:100%;
+padding:16px;
+margin-top:20px;
+border:none;
+border-radius:14px;
+background:linear-gradient(90deg,#00e5ff,#00ff9d);
+color:#000;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.results{
+margin-top:20px;
+padding:18px;
+background:#0f172a;
+border-radius:16px;
+line-height:1.8;
+}
+
+.result-line{
+padding:10px;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.green{
+color:#00ff9d;
+}
+
+.yellow{
+color:#ffe066;
+}
+
+.red{
+color:#ff5d73;
+}
+
+.info-box{
+margin-top:20px;
+padding:18px;
+border-radius:16px;
+background:#0b1220;
+line-height:1.7;
+}
+
+.info-box h3{
+margin-bottom:10px;
+color:#00e5ff;
+}
+
+.loan-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+#tvchart{
+height:600px;
+border-radius:20px;
+overflow:hidden;
+}
+
+.preset-buttons{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:12px;
+}
+
+.preset-buttons button{
+width:auto;
+padding:10px 16px;
+font-size:13px;
+margin:0;
+}
+
+@media(max-width:980px){
+.grid{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="hero">
+<h1>🪜 RO'Lyfe Option Ladder</h1>
+<p>
+Professional options risk ladder with contract sizing, stop-loss management, ROI projections,
+swing/scalp presets, profit targeting, and loan payment estimator.
+Built for intraday, swing, long-term, and short-term traders.
+</p>
+</div>
+
+<div class="grid">
+
+<div>
+
+<div class="card">
+<h2>📊 Trading Setup</h2>
+
+<label>Trading Style</label>
+<select id="style">
+<option>Scalping</option>
+<option>Intraday</option>
+<option>Swing</option>
+<option>Short-Term</option>
+<option>Long-Term</option>
+</select>
+
+<div class="preset-buttons">
+<button onclick="applyPreset('scalp')">⚡ Scalp</button>
+<button onclick="applyPreset('day')">📈 Day</button>
+<button onclick="applyPreset('swing')">🪜 Swing</button>
+<button onclick="applyPreset('long')">🚀 Long</button>
+</div>
+
+<label>Symbol</label>
+<input id="symbol" value="SPY">
+
+<label>Days Out (DTE)</label>
+<select id="dte">
+<option>9 Days</option>
+<option>21 Days</option>
+<option selected>30 Days</option>
+<option>60 Days</option>
+<option>90 Days</option>
+</select>
+
+<label>Account Balance ($)</label>
+<input type="number" id="balance" value="10000">
+
+<label>Account Risk %</label>
+<input type="number" id="risk" value="3">
+
+<label>Contracts</label>
+<input type="number" id="contracts" value="1">
+
+<label>Buy Entry ($)</label>
+<input type="number" id="entry" value="2.50" step="0.01">
+
+<label>Sell Stop %</label>
+<input type="number" id="stop" value="25">
+
+<label>Profit Target 1 (%)</label>
+<input type="number" id="pf1" value="20">
+
+<label>Profit Target 2 (%)</label>
+<input type="number" id="pf2" value="40">
+
+<label>Profit Target 3 (%) Optional</label>
+<input type="number" id="pf3" value="60">
+
+<button onclick="calculateTrade()">🧠 Analyze Trade</button>
+
+<div class="results" id="results">
+
+<div class="result-line">Suggested Contracts: --</div>
+<div class="result-line">Break Even: --</div>
+<div class="result-line">Profit 1: --</div>
+<div class="result-line">Profit 2: --</div>
+<div class="result-line">Profit 3: --</div>
+<div class="result-line">ROI: --</div>
+<div class="result-line">Spread Width: --</div>
+<div class="result-line">Trade Result: --</div>
+
+</div>
+
+<div class="info-box">
+<h3>🧠 Trade Guidance</h3>
+
+<p>
+⚡ Scalping → Tight stops (10%-20%), fast exits, 0-9 DTE.
+</p>
+
+<p>
+📈 Intraday → 15%-25% stop, 1-14 DTE.
+</p>
+
+<p>
+🪜 Swing Trades → 20%-35% stop, 21-60 DTE.
+</p>
+
+<p>
+🚀 Long-Term → Wider stops (30%-50%), 60-180 DTE.
+</p>
+
+<p>
+📌 Default chart view is 6 Month Daily for cleaner trend structure.
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+<h2>🏦 Simple Loan Calculator</h2>
+
+<div class="loan-grid">
+
+<div>
+<label>Loan Amount</label>
+<input type="number" id="loanAmount" value="100000">
+</div>
+
+<div>
+<label>Interest Rate %</label>
+<input type="number" id="loanRate" value="10">
+</div>
+
+<div>
+<label>Term (Years)</label>
+<input type="number" id="loanYears" value="30">
+</div>
+
+<div>
+<label>Down Payment</label>
+<input type="number" id="downPayment" value="10000">
+</div>
+
+</div>
+
+<button onclick="calcLoan()">💰 Calculate Loan</button>
+
+<div class="results" id="loanResults">
+
+<div class="result-line">Monthly Payment: --</div>
+<div class="result-line">Total Interest: --</div>
+<div class="result-line">Total Paid: --</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="card">
+<h2>📈 TradingView Chart</h2>
+<div id="tvchart"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+new TradingView.widget({
+container_id:"tvchart",
+autosize:true,
+symbol:"AMEX:SPY",
+interval:"D",
+timezone:"America/New_York",
+theme:"dark",
+style:"1",
+toolbar_bg:"#0f172a",
+hide_top_toolbar:false,
+allow_symbol_change:true
+});
+
+function applyPreset(type){
+
+if(type==="scalp"){
+document.getElementById("stop").value=15;
+document.getElementById("pf1").value=10;
+document.getElementById("pf2").value=20;
+document.getElementById("pf3").value=30;
+}
+
+if(type==="day"){
+document.getElementById("stop").value=20;
+document.getElementById("pf1").value=20;
+document.getElementById("pf2").value=35;
+document.getElementById("pf3").value=50;
+}
+
+if(type==="swing"){
+document.getElementById("stop").value=30;
+document.getElementById("pf1").value=30;
+document.getElementById("pf2").value=50;
+document.getElementById("pf3").value=80;
+}
+
+if(type==="long"){
+document.getElementById("stop").value=40;
+document.getElementById("pf1").value=50;
+document.getElementById("pf2").value=100;
+document.getElementById("pf3").value=150;
+}
+
+}
+
+function calculateTrade(){
+
+let balance=parseFloat(document.getElementById("balance").value);
+let risk=parseFloat(document.getElementById("risk").value);
+let contracts=parseFloat(document.getElementById("contracts").value);
+let entry=parseFloat(document.getElementById("entry").value);
+let stop=parseFloat(document.getElementById("stop").value);
+
+let pf1=parseFloat(document.getElementById("pf1").value);
+let pf2=parseFloat(document.getElementById("pf2").value);
+let pf3=parseFloat(document.getElementById("pf3").value);
+
+let riskCash=balance*(risk/100);
+
+let stopPrice=entry*(1-(stop/100));
+
+let riskPerContract=(entry-stopPrice)*100;
+
+let suggested=Math.max(1,Math.floor(riskCash/riskPerContract));
+
+let p1=((entry*(1+(pf1/100)))-entry)*contracts*100;
+let p2=((entry*(1+(pf2/100)))-entry)*contracts*100;
+let p3=((entry*(1+(pf3/100)))-entry)*contracts*100;
+
+let roi=((p2/(entry*contracts*100))*100).toFixed(2);
+
+let spread=(entry-stopPrice).toFixed(2);
+
+let result="⚠️ Moderate Setup";
+
+if(roi>40){
+result="🔥 Strong Risk/Reward";
+}
+
+if(roi<15){
+result="❌ Weak Reward Structure";
+}
+
+document.getElementById("results").innerHTML=`
+
+<div class="result-line green">
+Suggested Contracts: ${suggested}
+</div>
+
+<div class="result-line yellow">
+Break Even: $${entry.toFixed(2)}
+</div>
+
+<div class="result-line green">
+Profit 1: $${p1.toFixed(2)}
+</div>
+
+<div class="result-line green">
+Profit 2 Runner: $${p2.toFixed(2)}
+</div>
+
+<div class="result-line green">
+Profit 3 Extended: $${p3.toFixed(2)}
+</div>
+
+<div class="result-line yellow">
+Spread Width: $${spread}
+</div>
+
+<div class="result-line yellow">
+ROI Result: ${roi}%
+</div>
+
+<div class="result-line red">
+Trade Result: ${result}
+</div>
+
+`;
+
+}
+
+function calcLoan(){
+
+let amount=parseFloat(document.getElementById("loanAmount").value);
+let rate=parseFloat(document.getElementById("loanRate").value)/100/12;
+let years=parseFloat(document.getElementById("loanYears").value)*12;
+let down=parseFloat(document.getElementById("downPayment").value);
+
+let principal=amount-down;
+
+let payment=(principal*rate)/(1-Math.pow(1+rate,-years));
+
+let total=payment*years;
+let interest=total-principal;
+
+document.getElementById("loanResults").innerHTML=`
+
+<div class="result-line green">
+Monthly Payment: $${payment.toFixed(2)}
+</div>
+
+<div class="result-line yellow">
+Total Interest: $${interest.toFixed(2)}
+</div>
+
+<div class="result-line red">
+Total Paid: $${total.toFixed(2)}
+</div>
+
+`;
+
+}
+</script>
+
+</body>
+</html>
