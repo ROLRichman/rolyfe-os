@@ -6,11 +6,13 @@
 <title>RO'Lyfe Video Hub</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:Arial,sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
@@ -19,21 +21,62 @@ color:white;
 padding:20px;
 }
 
+/* TOP NAVIGATION */
+
+.topbar{
+position:sticky;
+top:0;
+z-index:999;
+background:#081712;
+padding:14px;
+display:flex;
+gap:12px;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+border-bottom:1px solid rgba(0,255,136,0.15);
+margin-bottom:25px;
+border-radius:16px;
+box-shadow:0 0 18px rgba(0,255,136,0.08);
+}
+
+.topbar a{
+color:#00ff88;
+text-decoration:none;
+font-weight:bold;
+font-size:14px;
+padding:10px 14px;
+border-radius:12px;
+transition:0.3s;
+background:#102018;
+}
+
+.topbar a:hover{
+background:#00ff88;
+color:#000;
+transform:translateY(-2px);
+}
+
+/* HEADER */
+
 .header{
 text-align:center;
 margin-bottom:35px;
 }
 
 .header h1{
-font-size:38px;
+font-size:42px;
 color:#00ff88;
 margin-bottom:10px;
+text-shadow:0 0 15px rgba(0,255,136,0.3);
 }
 
 .header p{
 color:#c9ffe0;
 font-size:15px;
 }
+
+/* HERO */
 
 .hero{
 background:linear-gradient(135deg,#0b1f17,#102b20,#06110d);
@@ -42,23 +85,45 @@ border-radius:22px;
 padding:28px;
 margin-bottom:30px;
 text-align:center;
+animation:glow 4s infinite alternate;
 }
 
 .hero h2{
-font-size:28px;
+font-size:30px;
 margin-bottom:12px;
+color:#00ff88;
 }
 
 .hero p{
 color:#d7ffe3;
-line-height:1.6;
+line-height:1.7;
+font-size:15px;
 }
+
+/* VIDEO */
+
+.video-wrap{
+margin-top:25px;
+overflow:hidden;
+border-radius:18px;
+box-shadow:0 0 30px rgba(0,255,136,0.2);
+}
+
+.video-wrap iframe{
+width:100%;
+height:450px;
+border:none;
+}
+
+/* GRID */
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:18px;
 }
+
+/* CARDS */
 
 .card{
 background:#102018;
@@ -87,6 +152,8 @@ color:#ccc;
 margin-bottom:18px;
 }
 
+/* BUTTONS */
+
 .btn{
 display:inline-block;
 padding:12px 18px;
@@ -96,6 +163,12 @@ color:#000;
 font-weight:bold;
 text-decoration:none;
 margin:5px 5px 5px 0;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 18px rgba(0,255,136,0.3);
 }
 
 .btn.dark{
@@ -104,85 +177,171 @@ color:white;
 border:1px solid #00ff88;
 }
 
+/* FOOTER */
+
 .footer{
 margin-top:40px;
 text-align:center;
 color:#8ebfa0;
 font-size:13px;
+padding:25px;
 }
+
+/* GLOW */
+
+@keyframes glow{
+from{
+box-shadow:0 0 10px rgba(0,255,136,0.10);
+}
+to{
+box-shadow:0 0 35px rgba(0,255,136,0.30);
+}
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.header h1{
+font-size:32px;
+}
+
+.hero h2{
+font-size:24px;
+}
+
+.video-wrap iframe{
+height:240px;
+}
+
+.topbar{
+gap:8px;
+}
+
+.topbar a{
+font-size:12px;
+padding:8px 10px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- TOPBAR -->
 
 <div class="topbar">
 <a href="../">🏠 Home</a>
 <a href="../forms/">📂 Funding</a>
 <a href="../contracts/">📄 Contracts</a>
 <a href="../trading/">📈 Trading</a>
+<a href="../calculators/">🧮 Calculators</a>
+<a href="../videos/">🎥 Videos</a>
 </div>
-  
+
+<!-- HEADER -->
+
 <div class="header">
 <h1>🎥 RO'Lyfe Video Hub</h1>
 <p>Watch • Learn • Execute</p>
 </div>
 
+<!-- HERO -->
+
 <div class="hero">
+
 <h2>🔥 RO'Lyfe Vision Library</h2>
-<p>Daily videos, AI insight, funding education, trading lessons, real estate strategy, and execution resources in one branded video command center.</p>
+
+<p>
+Daily videos, AI insight, funding education, trading lessons, real estate strategy, and execution resources in one branded video command center.
+</p>
+
+<div class="video-wrap">
+
+<iframe
+src="https://www.youtube.com/embed/iAlUx755K2s"
+title="RO'Lyfe Training"
+allowfullscreen>
+</iframe>
+
 </div>
+
+</div>
+
+<!-- GRID -->
 
 <div class="grid">
 
-<div class="hero">
-<h2>🔥 Featured Execution Training</h2>
+<!-- CARD -->
 
-<iframe width="100%" height="420"
-src="https://www.youtube.com/embed/iAlUx755K2s"
-title="RO'Lyfe Training"
-frameborder="0"
-allowfullscreen
-style="border-radius:18px;margin-top:20px;">
-</iframe>
-</div>
-  
 <div class="card">
 <h2>📈 TradingView Access</h2>
-<p>Sign up and explore TradingView for charting, indicators, watchlists, and market analysis.</p>
+
+<p>
+Sign up and explore TradingView for charting, indicators, watchlists, and market analysis.
+</p>
 
 <a class="btn"
 href="https://www.tradingview.com/pricing/?share_your_love=Richman29&mobileapp=true"
 target="_blank">
 Open TradingView
 </a>
+
 </div>
 
+<!-- CARD -->
+
 <div class="card">
+
 <h2>🎬 Stock Trading Series</h2>
-<p>Six-part beginner stock trading series before moving into options.</p>
 
-<a class="btn" href="https://youtu.be/_BxNhfL8TVo" target="_blank">Video 1: Basics</a>
-<a class="btn" href="https://youtu.be/iX269TC6Ebs" target="_blank">Video 2: Choosing Stock</a>
-<a class="btn" href="https://youtu.be/y45MIAKcdZQ" target="_blank">Video 3: Preparing Trade</a>
-<a class="btn" href="https://youtu.be/3KdTgwGlWE8" target="_blank">Video 4: Executing Trade</a>
-<a class="btn" href="https://youtu.be/bf2lVJoU3b0" target="_blank">Video 5: Managing Trade</a>
-<a class="btn" href="https://youtu.be/6jagYoeQwYU" target="_blank">Video 6: After Trade</a>
+<p>
+Six-part beginner stock trading series before moving into options.
+</p>
+
+<a class="btn" href="https://youtu.be/_BxNhfL8TVo" target="_blank">Video 1</a>
+
+<a class="btn" href="https://youtu.be/iX269TC6Ebs" target="_blank">Video 2</a>
+
+<a class="btn" href="https://youtu.be/y45MIAKcdZQ" target="_blank">Video 3</a>
+
+<a class="btn" href="https://youtu.be/3KdTgwGlWE8" target="_blank">Video 4</a>
+
+<a class="btn" href="https://youtu.be/bf2lVJoU3b0" target="_blank">Video 5</a>
+
+<a class="btn" href="https://youtu.be/6jagYoeQwYU" target="_blank">Video 6</a>
+
 </div>
 
+<!-- CARD -->
+
 <div class="card">
+
 <h2>⏱ 4 Hour Trading Lesson</h2>
-<p>Learn the 4-hour chart strategy and market structure training.</p>
+
+<p>
+Learn the 4-hour chart strategy and market structure training.
+</p>
 
 <a class="btn"
 href="https://youtu.be/HfZTCZTDfWk?si=W7awh8Tj219N3jLK"
 target="_blank">
 Watch Lesson
 </a>
+
 </div>
 
+<!-- CARD -->
+
 <div class="card">
+
 <h2>📊 Trading Logs</h2>
-<p>Download stock and option tracking logs for disciplined trade management.</p>
+
+<p>
+Download stock and option tracking logs for disciplined trade management.
+</p>
 
 <a class="btn"
 href="https://mcusercontent.com/c137ea973e64f42b7a794fc66/files/e1a013cc-1575-b194-1691-365642a71e12/Market_Watch_Option_Log.xlsx"
@@ -195,52 +354,108 @@ href="https://mcusercontent.com/c137ea973e64f42b7a794fc66/files/fbad17b0-75ae-0b
 target="_blank">
 Stock Log
 </a>
+
 </div>
 
+<!-- CARD -->
+
 <div class="card">
+
 <h2>🤖 AI Future</h2>
-<p>Robots, automation, OpenAI, humanoids, business systems, and future infrastructure.</p>
 
-<a class="btn" href="https://www.youtube.com/results?search_query=humanoid+robots+future+ai" target="_blank">Humanoid Robots</a>
-<a class="btn" href="https://www.youtube.com/results?search_query=openai+robotics+future" target="_blank">OpenAI Robotics</a>
-<a class="btn" href="https://www.youtube.com/results?search_query=ai+automation+business+systems" target="_blank">AI Automation</a>
-<a class="btn" href="https://www.youtube.com/results?search_query=nvidia+ai+robots" target="_blank">NVIDIA AI Robots</a>
-<a class="btn" href="https://www.youtube.com/results?search_query=tesla+optimus+robot" target="_blank">Tesla Optimus</a>
+<p>
+Robots, automation, OpenAI, humanoids, business systems, and future infrastructure.
+</p>
+
+<a class="btn"
+href="https://www.youtube.com/results?search_query=humanoid+robots+future+ai"
+target="_blank">
+Humanoid Robots
+</a>
+
+<a class="btn"
+href="https://www.youtube.com/results?search_query=openai+robotics+future"
+target="_blank">
+OpenAI Robotics
+</a>
+
+<a class="btn"
+href="https://www.youtube.com/results?search_query=tesla+optimus+robot"
+target="_blank">
+Tesla Optimus
+</a>
+
 </div>
 
+<!-- CARD -->
+
 <div class="card">
+
 <h2>🏡 Real Estate Execution</h2>
-<p>Deal analysis, wholesaling, funding, inspections, seller strategy, and contractor education.</p>
 
-<a class="btn" href="https://www.youtube.com/results?search_query=real+estate+wholesaling+deal+analysis" target="_blank">Deal Analysis</a>
-<a class="btn" href="https://www.youtube.com/results?search_query=hard+money+real+estate+funding" target="_blank">Hard Money</a>
-<a class="btn" href="https://www.youtube.com/results?search_query=creative+finance+real+estate" target="_blank">Creative Finance</a>
-<a class="btn" href="https://www.youtube.com/results?search_query=fix+and+flip+contractor+walkthrough" target="_blank">Fix & Flip</a>
+<p>
+Deal analysis, wholesaling, funding, inspections, seller strategy, and contractor education.
+</p>
+
+<a class="btn"
+href="https://www.youtube.com/results?search_query=real+estate+wholesaling+deal+analysis"
+target="_blank">
+Deal Analysis
+</a>
+
+<a class="btn"
+href="https://www.youtube.com/results?search_query=hard+money+real+estate+funding"
+target="_blank">
+Hard Money
+</a>
+
+<a class="btn"
+href="https://www.youtube.com/results?search_query=creative+finance+real+estate"
+target="_blank">
+Creative Finance
+</a>
+
 </div>
 
+<!-- CARD -->
+
 <div class="card">
+
 <h2>💰 Wealth Mindset</h2>
-<p>Private capital, execution, discipline, leadership, confidence, and long-term business vision.</p>
+
+<p>
+Private capital, execution, discipline, leadership, confidence, and long-term business vision.
+</p>
 
 <a class="btn"
 href="https://www.youtube.com/results?search_query=wealth+mindset+private+capital"
 target="_blank">
 Watch Videos
 </a>
+
 </div>
 
+<!-- CARD -->
+
 <div class="card">
+
 <h2>📈 Trading + AI Markets</h2>
-<p>AI trading systems, market structure, trend logic, and execution training.</p>
+
+<p>
+AI trading systems, market structure, trend logic, and execution training.
+</p>
 
 <a class="btn"
 href="https://www.youtube.com/results?search_query=ai+trading+systems"
 target="_blank">
 Open Search
 </a>
+
 </div>
 
 </div>
+
+<!-- FOOTER -->
 
 <div class="footer">
 RO'Lyfe Video Hub © 2026 | Watch • Learn • Execute
