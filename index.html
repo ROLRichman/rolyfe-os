@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RO'Lyfe OS</title>
 
@@ -21,12 +21,12 @@ color:white;
 padding:20px;
 }
 
-/* TOP HERO */
+/* HERO */
 
 .topbar{
 text-align:center;
 margin-bottom:35px;
-padding:35px 20px;
+padding:40px 20px;
 border-radius:24px;
 background:
 linear-gradient(
@@ -39,21 +39,39 @@ linear-gradient(
 border:1px solid rgba(0,255,136,0.18);
 box-shadow:0 0 30px rgba(0,255,136,0.08);
 animation:glow 5s infinite alternate;
+position:relative;
+overflow:hidden;
+}
+
+.topbar::before{
+content:"";
+position:absolute;
+top:-120px;
+left:-120px;
+width:260px;
+height:260px;
+background:rgba(0,255,136,0.08);
+filter:blur(70px);
+border-radius:50%;
 }
 
 .topbar h1{
-font-size:46px;
+font-size:48px;
 margin-bottom:12px;
 color:#00ff88;
 text-shadow:0 0 15px rgba(0,255,136,0.35);
+position:relative;
+z-index:2;
 }
 
 .topbar p{
 color:#c8d2dc;
 font-size:16px;
-line-height:1.6;
-max-width:800px;
+line-height:1.7;
+max-width:900px;
 margin:auto;
+position:relative;
+z-index:2;
 }
 
 /* QUICK NAV */
@@ -82,6 +100,52 @@ transition:0.3s;
 background:#00ff88;
 color:#000;
 transform:translateY(-3px);
+}
+
+/* REPAIR SECTION */
+
+.repair-banner{
+margin-bottom:35px;
+padding:28px;
+border-radius:24px;
+background:linear-gradient(135deg,#132033,#0f172a);
+border:1px solid rgba(255,255,255,0.08);
+display:flex;
+flex-wrap:wrap;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+box-shadow:0 0 25px rgba(0,0,0,0.3);
+}
+
+.repair-text h2{
+font-size:30px;
+color:#00ff88;
+margin-bottom:10px;
+}
+
+.repair-text p{
+max-width:700px;
+line-height:1.7;
+color:#d0d7df;
+font-size:15px;
+}
+
+.repair-btn{
+text-decoration:none;
+background:#00ff88;
+color:#000;
+padding:16px 28px;
+border-radius:16px;
+font-weight:bold;
+font-size:15px;
+transition:0.3s;
+box-shadow:0 0 20px rgba(0,255,136,0.25);
+}
+
+.repair-btn:hover{
+transform:translateY(-4px) scale(1.03);
+background:white;
 }
 
 /* GRID */
@@ -202,6 +266,14 @@ padding:10px 12px;
 font-size:20px;
 }
 
+.repair-banner{
+padding:22px;
+}
+
+.repair-text h2{
+font-size:24px;
+}
+
 }
 
 </style>
@@ -226,16 +298,33 @@ Workflow • Funding • Contracts • Systems • Execution • Trading • AI 
 <div class="quicknav">
 
 <a href="./forms/">📝 Forms</a>
-
 <a href="./deal-terminal/">🏡 Deals</a>
-
 <a href="./funding/">💰 Funding</a>
-
 <a href="./trading/">📈 Trading</a>
-
 <a href="./videos/">🎥 Videos</a>
-
 <a href="./contracts/">📄 Contracts</a>
+
+</div>
+
+<!-- REPAIR HUB -->
+
+<div class="repair-banner">
+
+<div class="repair-text">
+
+<h2>🛠 Contractor Repair Breakdown</h2>
+
+<p>
+Access the RO'Lyfe rehab scope system, contractor repair line items,
+inspection workflow, budget analysis, COGO-style breakdowns,
+and funding-ready rehab estimates.
+</p>
+
+</div>
+
+<a class="repair-btn" href="./calculators/">
+OPEN REPAIR SYSTEM →
+</a>
 
 </div>
 
@@ -244,84 +333,121 @@ Workflow • Funding • Contracts • Systems • Execution • Trading • AI 
 <div class="grid">
 
 <a class="card" href="./contracts/">
-
 <h2>📄 Contracts</h2>
-
-<p>
-Assignments, PSA agreements, disclosures, and closing documents.
-</p>
-
+<p>Assignments, PSA agreements, disclosures, and closing documents.</p>
 <span class="badge">OPEN</span>
-
 </a>
 
 <a class="card" href="./funding/">
-
 <h2>💰 Funding</h2>
-
-<p>
-Private lenders, business funding, credit, and capital resources.
-</p>
-
+<p>Private lenders, business funding, credit, and capital resources.</p>
 <span class="badge">OPEN</span>
-
 </a>
 
 <a class="card" href="./forms/">
-
 <h2>📝 Forms</h2>
-
-<p>
-Lead intake, applications, uploads, and onboarding systems.
-</p>
-
+<p>Lead intake, applications, uploads, and onboarding systems.</p>
 <span class="badge">OPEN</span>
-
 </a>
 
 <a class="card" href="./deal-terminal/">
-
 <h2>🏡 Deal Terminal</h2>
-
-<p>
-Analyze deals, calculate ARV, MAO, repairs, and profits.
-</p>
-
+<p>Analyze deals, calculate ARV, MAO, repairs, and profits.</p>
 <span class="badge">LIVE</span>
-
 </a>
 
 <a class="card" href="./trading/">
-
 <h2>📈 Trading</h2>
-
-<p>
-Market terminal, watchlists, news, options, and analysis tools.
-</p>
-
+<p>Market terminal, watchlists, news, options, and analysis tools.</p>
 <span class="badge">LIVE</span>
-
 </a>
 
 <a class="card" href="./videos/">
-
 <h2>🎥 Videos</h2>
-
-<p>
-Training, walkthroughs, educational content, and media hub.
-</p>
-
+<p>Training, walkthroughs, educational content, and media hub.</p>
 <span class="badge">WATCH</span>
-
 </a>
 
 <a class="card" href="./resources/">
-
 <h2>📚 Resources</h2>
+<p>Tools, websites, calculators, software, and workflow systems.</p>
+<span class="badge">TOOLS</span>
+</a>
+
+<a class="card" href="./programs/">
+<h2>🚀 Programs</h2>
+<p>Business systems, partner programs, and execution engines.</p>
+<span class="badge">SYSTEMS</span>
+</a>
+
+<a class="card" href="./partners/">
+<h2>🤝 Partners</h2>
+<p>Strategic partners, referrals, collaborations, and affiliates.</p>
+<span class="badge">NETWORK</span>
+</a>
+
+<a class="card" href="./brokers/">
+<h2>🏦 Brokers</h2>
+<p>Loan officers, lenders, brokers, and funding relationships.</p>
+<span class="badge">FUNDING</span>
+</a>
+
+<a class="card" href="./calculators/">
+<h2>🧠 Calculators</h2>
+<p>MAO, rehab, overage, seller finance, and profit calculators.</p>
+<span class="badge">TOOLS</span>
+</a>
+
+<a class="card" href="./docs/">
+<h2>📂 Docs</h2>
+<p>PDFs, uploads, downloadable files, and internal documentation.</p>
+<span class="badge">FILES</span>
+</a>
+
+<a class="card" href="./affiliates/">
+<h2>🔗 Affiliates</h2>
+<p>Affiliate programs, commissions, referral systems, and links.</p>
+<span class="badge">INCOME</span>
+</a>
+
+<a class="card" href="./ai-future/">
+<h2>🤖 AI Future</h2>
+<p>AI systems, robotics, automation, and future technology ideas.</p>
+<span class="badge">FUTURE</span>
+</a>
+
+<a class="card" href="./assets/">
+<h2>🎨 Assets</h2>
+<p>Graphics, logos, banners, branding, and media resources.</p>
+<span class="badge">MEDIA</span>
+</a>
+
+<a class="card" href="./images/">
+<h2>🖼 Images</h2>
+<p>Photos, renders, project images, and visual content storage.</p>
+<span class="badge">GALLERY</span>
+</a>
+
+<a class="card" href="./audios/">
+<h2>🎵 Audios</h2>
+<p>Voice recordings, music, background audio, and sound assets.</p>
+<span class="badge">SOUND</span>
+</a>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
 
 <p>
-Tools, websites, calculators, software, and workflow systems.
+RO'Lyfe Holdings LLC © 2026 | Built For Execution
 </p>
+
+</div>
+
+</body>
+</html>
 
 <span class="badge">TOOLS</span>
 
