@@ -398,4 +398,381 @@ onclick="closeInfo()">
 
 </div>
 
-  
+ <script>
+
+function money(x){
+
+return "$" +
+Number(x).toLocaleString(undefined,{
+maximumFractionDigits:0
+});
+
+}
+
+function payment(principal,annualRate,years){
+
+let r=(annualRate/100)/12;
+
+let n=years*12;
+
+return (
+principal*r
+)/(1-Math.pow(1+r,-n));
+
+}
+
+function balloonBalance(
+principal,
+annualRate,
+amortYears,
+balloonYears
+){
+
+let r=(annualRate/100)/12;
+
+let paid=balloonYears*12;
+
+let pmt=payment(
+principal,
+annualRate,
+amortYears
+);
+
+return principal*Math.pow(1+r,paid)
+-
+pmt*((Math.pow(1+r,paid)-1)/r);
+
+}
+
+function analyzeDeal(){
+
+let arv=
+Number(
+document.getElementById("arv").value||0
+);
+
+let price=
+Number(
+document.getElementById("price").value||0
+);
+
+let rehab=
+Number(
+document.getElementById("rehab").value||0
+);
+
+let fee=
+Number(
+document.getElementById("fee").value||0
+);
+
+let months=
+Number(
+document.getElementById("months").value||0
+);
+
+let holding=
+Number(
+document.getElementById("holding").value||0
+);
+
+let formula=
+Number(
+document.getElementById("formula").value||70
+);
+
+let holdCost=
+months*holding;
+
+let mao=
+(arv*(formula/100))
+-
+rehab
+-
+fee;
+
+let spread=
+arv
+-
+price
+-
+rehab
+-
+fee
+-
+holdCost;
+
+let overage=
+arv-price;
+
+let roi=
+price>0
+?
+((spread/price)*100).toFixed(1)
+:
+0;
+
+let score=42;
+
+if(spread>100000){
+
+score=95;
+
+}else if(spread>70000){
+
+score=82;
+
+}else if(spread>40000){
+
+score=68;
+
+}
+
+let badge='';
+
+if(score>=80){
+
+badge=
+'<div class="badge good">🔥 GREAT DEAL • CLOSE FAST</div>';
+
+}else if(score>=60){
+
+badge=
+'<div class="badge mid">⚠️ SOLID DEAL • NEGOTIATE</div>';
+
+}else{
+
+badge=
+'<div class="badge bad">❌ TIGHT DEAL • REWORK NUMBERS</div>';
+
+}
+
+document.getElementById("results").innerHTML=`
+
+<div class="result-line">
+MAO: ${money(mao)}
+</div>
+
+<div class="result-line">
+Profit Spread: ${money(spread)}
+</div>
+
+<div class="result-line">
+Overage: ${money(overage)}
+</div>
+
+<div class="result-line">
+Holding Costs: ${money(holdCost)}
+</div>
+
+<div class="result-line">
+Estimated Net: ${money(spread)}
+</div>
+
+<div class="result-line">
+ROI: ${roi}%
+</div>
+
+<div class="result-line">
+Deal Score: ${score}/100
+</div>
+
+`;
+
+document.getElementById("dealBadge").innerHTML=
+badge;
+
+let cashPct=
+Number(
+document.getElementById("cashPct").value||50
+);
+
+let carryPct=
+Number(
+document.getElementById("carryPct").value||65
+);
+
+let downPct=
+Number(
+document.getElementById("downPct").value||5
+);
+
+let carryRate=
+Number(
+document.getElementById("carryRate").value||5
+);
+
+let carryBalloon=
+Number(
+document.getElementById("carryBalloon").value||4
+);
+
+let financePct=
+Number(
+document.getElementById("financePct").value||75
+);
+
+let financeRate=
+Number(
+document.getElementById("financeRate").value||6
+);
+
+let financeBalloon=
+Number(
+document.getElementById("financeBalloon").value||5
+);
+
+let cashOffer=
+arv*(cashPct/100);
+
+let sellerCarry=
+arv*(carryPct/100);
+
+let carryDown=
+sellerCarry*(downPct/100);
+
+let carryLoan=
+sellerCarry-carryDown;
+
+let carryMonthly=
+payment(
+carryLoan,
+carryRate,
+30
+);
+
+let carryBalloonBalance=
+balloonBalance(
+carryLoan,
+carryRate,
+30,
+carryBalloon
+);
+
+let carryPayments=
+carryBalloon*12;
+
+let carryTotalPayments=
+carryMonthly*carryPayments;
+
+let carryRevenue=
+carryDown
++
+carryTotalPayments
++
+carryBalloonBalance;
+
+let sellerFinance=
+arv*(financePct/100);
+
+let financeMonthly=
+payment(
+sellerFinance,
+financeRate,
+30
+);
+
+let financeBalloonBalance=
+balloonBalance(
+sellerFinance,
+financeRate,
+30,
+financeBalloon
+);
+
+let financePayments=
+financeBalloon*12;
+
+let financeTotalPayments=
+financeMonthly*financePayments;
+
+let financeRevenue=
+financeTotalPayments
++
+financeBalloonBalance;
+
+document.getElementById("tierResults").innerHTML=`
+
+<div class="result-line">
+<strong>All Cash Offer:</strong>
+${money(cashOffer)}
+</div>
+
+<div class="result-line">
+<strong>Seller Carry:</strong>
+${money(sellerCarry)}
+</div>
+
+<div class="result-line">
+Buyer to pay
+${money(carryDown)}
+down.
+Seller to carry
+${money(carryLoan)}
+at
+${carryRate.toFixed(2)}%
+with monthly payments of
+${money(carryMonthly)}
+and balloon balance of
+${money(carryBalloonBalance)}.
+</div>
+
+<div class="result-line">
+48 Payments:
+${money(carryTotalPayments)}
+•
+Total Revenue:
+${money(carryRevenue)}
+</div>
+
+<div class="result-line">
+<strong>Seller Financing:</strong>
+${money(sellerFinance)}
+</div>
+
+<div class="result-line">
+Monthly payments:
+${money(financeMonthly)}
+•
+Balloon:
+${money(financeBalloonBalance)}
+</div>
+
+<div class="result-line">
+60 Payments:
+${money(financeTotalPayments)}
+•
+Total Revenue:
+${money(financeRevenue)}
+</div>
+
+`;
+
+}
+
+function showInfo(title,text){
+
+document.getElementById("modalTitle").innerText=
+title;
+
+document.getElementById("modalText").innerText=
+text;
+
+document.getElementById("infoModal").style.display=
+"block";
+
+}
+
+function closeInfo(){
+
+document.getElementById("infoModal").style.display=
+"none";
+
+}
+
+analyzeDeal();
+
+</script>
+
+</body>
+</html> 
