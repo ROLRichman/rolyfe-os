@@ -95,3 +95,151 @@ font-weight:bold;
 }
 </style>
 </head>
+
+<body>
+
+<div class="topbar">
+<a href="../../">🏠 Home</a>
+<a href="../">🧮 Calculators</a>
+<a href="../../deal-terminal/">🏡 Deals</a>
+<a href="../../funding/">💰 Funding</a>
+<a href="../../contracts/">📄 Contracts</a>
+<a href="../../trading/">📈 Trading</a>
+</div>
+
+<div class="hero">
+<h1>🏗️ RO'Lyfe Rehab Budget Calculator</h1>
+
+<p>
+COGO-style rehab breakdown,
+repair scope notes,
+contingency,
+final rehab totals,
+and projected spread analysis.
+</p>
+</div>
+
+<div class="card">
+
+<h2>🏡 Property Information</h2>
+
+<div class="grid">
+
+<div>
+<label>Property Address</label>
+<input type="text" id="address" placeholder="123 Main St">
+</div>
+
+<div>
+<label>ARV</label>
+<input type="number" id="arv" placeholder="350000">
+</div>
+
+<div>
+<label>Purchase Price</label>
+<input type="number" id="purchase" placeholder="140000">
+</div>
+
+<div>
+<label>Contractor</label>
+<input type="text" id="contractor" placeholder="RJ Construction">
+</div>
+
+</div>
+</div>
+
+<div class="card">
+
+<h2>🧾 Rehab Scope Breakdown</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Item #</th>
+<th>Description</th>
+<th>Estimate Cost</th>
+<th>Scope Notes</th>
+</tr>
+</thead>
+
+<tbody id="rehabTable"></tbody>
+
+</table>
+
+</div>
+
+<button class="btn" onclick="calculateRehab()">
+🧠 Calculate Rehab
+</button>
+
+<br><br>
+
+<button class="btn" onclick="resetRehab()">
+♻️ Reset Rehab
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📊 Rehab Summary</h2>
+
+<div class="grid">
+
+<div>
+<label>Contingency %</label>
+<input type="number" id="contingency" value="10">
+</div>
+
+<div>
+<label>Extra Buffer Cost</label>
+<input type="number" id="buffer" value="0">
+</div>
+
+</div>
+
+<div class="summary">
+
+<div class="result">
+<h3>Rehab Subtotal</h3>
+<p id="subtotal">$0.00</p>
+</div>
+
+<div class="result">
+<h3>Contingency</h3>
+<p id="contingencyTotal">$0.00</p>
+</div>
+
+<div class="result">
+<h3>Final Rehab</h3>
+<p id="finalRehab">$0.00</p>
+</div>
+
+<div class="result">
+<h3>Projected Spread</h3>
+<p id="spread">$0.00</p>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+
+<h2>🧠 Global Rehab Notes</h2>
+
+<textarea
+id="globalNotes"
+placeholder="Add lender notes, contractor notes, roof comments, access instructions, timelines, etc."></textarea>
+
+</div>
+
+<div class="footer">
+RO'Lyfe Holdings LLC © 2026 | Rehab Execution System
+</div>
+
+
+
+  
