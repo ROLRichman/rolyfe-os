@@ -197,3 +197,205 @@ grid-template-columns:1fr;
 </style>
 
 </head>
+
+<body>
+
+<div class="topbar">
+<a href="../">🏠 Home</a>
+<a href="../calculators/">🧮 Calculators</a>
+<a href="../funding/">💰 Funding</a>
+<a href="../forms/">📂 Forms</a>
+<a href="../contracts/">📄 Contracts</a>
+<a href="../trading/">📈 Trading</a>
+</div>
+
+<div class="hero">
+<h1>🏡 RO'Lyfe Deal Terminal</h1>
+<p>MAO • Overage • Profit Spread • 3-Tier Offers • Seller Finance • Balloon Payments • Deal Score</p>
+</div>
+
+<div class="container">
+
+<div class="split">
+
+<div>
+
+<div class="card">
+<h2>📊 Property Inputs</h2>
+
+<label>Property Address</label>
+<input id="address" value="6838 Ogontz Ave Philadelphia PA">
+
+<label>ARV <span class="info" onclick="showInfo('ARV','After Repair Value — estimated resale value after the rehab is complete.')">ⓘ</span></label>
+<input type="number" id="arv" value="350000">
+
+<label>Purchase Price</label>
+<input type="number" id="price" value="175000">
+
+<label>Estimated Rehab</label>
+<input type="number" id="rehab" value="60000">
+
+<label>Assignment Fee</label>
+<input type="number" id="fee" value="20000">
+
+<label>Holding Months</label>
+<input type="number" id="months" value="6">
+
+<label>Monthly Holding Cost</label>
+<input type="number" id="holding" value="2000">
+
+<label>Offer Formula</label>
+<select id="formula">
+<option value="70">70% Rule</option>
+<option value="65">65% Rule</option>
+</select>
+
+<label>Deal Notes</label>
+<textarea id="notes">Roof replacement needed. Strong ARV potential.</textarea>
+
+<button onclick="analyzeDeal()">🔥 Analyze Deal</button>
+
+<div class="quick-links">
+<a target="_blank" href="https://www.zillow.com/">🏠 Zillow</a>
+<a target="_blank" href="https://www.redfin.com/">📍 Redfin</a>
+<a target="_blank" href="https://property.phila.gov/">🏛 Philly Property</a>
+<a target="_blank" href="https://opainquiry.phila.gov/">📑 OPA</</a>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🧠 3-Tier Offer Settings</h2>
+
+<label>All Cash Offer (% ARV)</label>
+<input type="number" id="cashPct" value="50">
+
+<label>Seller Carry Offer (% ARV)</label>
+<input type="number" id="carryPct" value="65">
+
+<label>Down Payment (% Price)</label>
+<input type="number" id="downPct" value="5">
+
+<label>Carry Interest Rate (%)</label>
+<input type="number" id="carryRate" value="5">
+
+<label>Carry Balloon Years</label>
+<input type="number" id="carryBalloon" value="4">
+
+<label>Seller Finance Offer (% ARV)</label>
+<input type="number" id="financePct" value="75">
+
+<label>Seller Finance Interest Rate (%)</label>
+<input type="number" id="financeRate" value="6">
+
+<label>Seller Finance Balloon Years</label>
+<input type="number" id="financeBalloon" value="5">
+
+<button onclick="analyzeDeal()">
+
+🧾 Run 3-Tier Offers
+
+</button>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="card">
+
+<h2>💰 Deal Results</h2>
+
+<div class="results" id="results">
+
+<div class="result-line">
+MAO: --
+</div>
+
+<div class="result-line">
+Profit Spread: --
+</div>
+
+<div class="result-line">
+Overage: --
+</div>
+
+<div class="result-line">
+Holding Costs: --
+</div>
+
+<div class="result-line">
+Estimated Net: --
+</div>
+
+<div class="result-line">
+ROI: --
+</div>
+
+<div class="result-line">
+Deal Score: --
+</div>
+
+</div>
+
+<div id="dealBadge"></div>
+
+</div>
+
+<div class="card">
+
+<h2>📄 3-Tier Offer Output</h2>
+
+<div class="results" id="tierResults">
+
+<div class="result-line">
+All Cash Offer: --
+</div>
+
+<div class="result-line">
+Seller Carry: --
+</div>
+
+<div class="result-line">
+Seller Financing: --
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+RO'Lyfe Holdings LLC © 2026
+| Deal Execution System
+
+</div>
+
+<div class="modal" id="infoModal">
+
+<div class="modal-box">
+
+<span class="close"
+onclick="closeInfo()">
+
+×
+
+</span>
+
+<h2 id="modalTitle"></h2>
+
+<p id="modalText"></p>
+
+</div>
+
+</div>
+
+  
