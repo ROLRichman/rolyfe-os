@@ -355,3 +355,270 @@ RO'Lyfe Holdings LLC © 2026
 | Trading Execution System
 
 </div>  
+
+<script>
+
+new TradingView.widget({
+
+container_id:"tvchart",
+
+autosize:true,
+
+symbol:"AMEX:SPY",
+
+interval:"D",
+
+timezone:"America/New_York",
+
+theme:"dark",
+
+style:"1",
+
+toolbar_bg:"#0f172a",
+
+allow_symbol_change:true
+
+});
+
+function applyPreset(type){
+
+if(type==="scalp"){
+
+stop.value=15;
+tp1.value=10;
+tp2.value=20;
+tp3.value=30;
+
+}
+
+if(type==="day"){
+
+stop.value=20;
+tp1.value=20;
+tp2.value=35;
+tp3.value=50;
+
+}
+
+if(type==="swing"){
+
+stop.value=30;
+tp1.value=30;
+tp2.value=50;
+tp3.value=80;
+
+}
+
+if(type==="long"){
+
+stop.value=40;
+tp1.value=50;
+tp2.value=100;
+tp3.value=150;
+
+}
+
+}
+
+function money(x){
+
+return "$"+
+
+Number(x).toLocaleString(
+undefined,
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+});
+
+}
+
+function calculateTrade(){
+
+let bal=
+Number(balance.value||0);
+
+let riskPct=
+Number(risk.value||0);
+
+let entryPrice=
+Number(entry.value||0);
+
+let stopPct=
+Number(stop.value||0);
+
+let p1=
+Number(tp1.value||0);
+
+let p2=
+Number(tp2.value||0);
+
+let p3=
+Number(tp3.value||0);
+
+let riskCash=
+bal*(riskPct/100);
+
+let stopPrice=
+entryPrice*(1-(stopPct/100));
+
+let riskPerContract=
+(entryPrice-stopPrice)*100;
+
+let suggested=
+Math.max(
+1,
+Math.floor(riskCash/riskPerContract)
+);
+
+let tp1Price=
+entryPrice*(1+(p1/100));
+
+let tp2Price=
+entryPrice*(1+(p2/100));
+
+let tp3Price=
+entryPrice*(1+(p3/100));
+
+let profit1=
+(tp1Price-entryPrice)
+*
+suggested
+*
+100;
+
+let profit2=
+(tp2Price-entryPrice)
+*
+suggested
+*
+100;
+
+let profit3=
+(tp3Price-entryPrice)
+*
+suggested
+*
+100;
+
+let breakeven=
+entryPrice;
+
+let totalRisk=
+riskPerContract*suggested;
+
+let result=
+"⚠️ Moderate Setup";
+
+if(p2>=40){
+
+result=
+"🔥 Strong Ladder Setup";
+
+}
+
+if(stopPct>45){
+
+result=
+"⚠️ Wide Stop — Size Down";
+
+}
+
+if(stopPct<10){
+
+result=
+"❌ Stop Too Tight";
+
+}
+
+document.getElementById("results").innerHTML=`
+
+<div class="result-line green">
+
+Suggested Contracts:
+${suggested}
+
+</div>
+
+<div class="result-line red">
+
+Total Risk:
+${money(totalRisk)}
+
+/
+Max Risk:
+${money(riskCash)}
+
+</div>
+
+<div class="result-line yellow">
+
+Stop Price:
+${money(stopPrice)}
+
+</div>
+
+<div class="result-line blue">
+
+Breakeven:
+${money(breakeven)}
+
+</div>
+
+<div class="result-line green">
+
+Take Profit 1:
+${money(tp1Price)}
+
+|
+Profit:
+${money(profit1)}
+
+</div>
+
+<div class="result-line green">
+
+Take Profit 2:
+${money(tp2Price)}
+
+|
+Profit:
+${money(profit2)}
+
+</div>
+
+<div class="result-line green">
+
+Runner Target:
+${money(tp3Price)}
+
+|
+Profit:
+${money(profit3)}
+
+</div>
+
+<div class="result-line yellow">
+
+Move stop to breakeven
+after partial profit.
+
+</div>
+
+<div class="result-line red">
+
+Trade Result:
+${result}
+
+</div>
+
+`;
+
+}
+
+calculateTrade();
+
+</script>
+
+</body>
+</html>  
