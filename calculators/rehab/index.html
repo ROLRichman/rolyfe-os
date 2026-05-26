@@ -489,6 +489,36 @@ calculateRehab();
 
 }
 
+document.getElementById("buffer").value = 0;
+
+calculateRehab();
+
+}
+
+document.addEventListener("input", function(e){
+
+if(
+
+e.target.classList.contains("costInput") ||
+
+e.target.id === "arv" ||
+
+e.target.id === "purchase" ||
+
+e.target.id === "contingency" ||
+
+e.target.id === "buffer"
+
+){
+
+calculateRehab();
+
+}
+
+});
+
+calculateRehab();
+  
 </script>
 
 </body>
