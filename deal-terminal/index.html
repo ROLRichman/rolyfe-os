@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -18,7 +19,7 @@ max-width:1450px;
 margin:auto;
 }
 
-.grid{
+.split{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:20px;
@@ -42,7 +43,7 @@ display:block;
 margin-top:14px;
 margin-bottom:6px;
 font-size:14px;
-opacity:.85;
+opacity:.9;
 }
 
 input,
@@ -58,7 +59,7 @@ font-size:15px;
 }
 
 textarea{
-min-height:100px;
+min-height:90px;
 resize:vertical;
 }
 
@@ -113,9 +114,9 @@ font-weight:bold;
 
 .badge{
 display:inline-block;
-padding:10px 14px;
-border-radius:12px;
-margin-top:10px;
+padding:12px 16px;
+border-radius:14px;
+margin-top:12px;
 font-weight:bold;
 }
 
@@ -136,7 +137,7 @@ color:#ff5d73;
 
 @media(max-width:980px){
 
-.grid{
+.split{
 grid-template-columns:1fr;
 }
 
@@ -167,18 +168,22 @@ grid-template-columns:1fr;
 <h1>🏡 RO'Lyfe Deal Analyzer</h1>
 
 <p>
-Analyze ARV, rehab, MAO,
-assignment spreads,
+
+Analyze ARV,
+rehab,
+MAO,
 holding costs,
-cash offers,
-and investor profit margins.
+3-tier offers,
+seller financing,
+and investor spreads.
+
 </p>
 
 </div>
 
 <div class="container">
 
-<div class="grid">
+<div class="split">
 
 <div>
 
@@ -188,42 +193,49 @@ and investor profit margins.
 
 <label>Property Address</label>
 
-<input id="address"
+<input
+id="address"
 value="6838 Ogontz Ave Philadelphia PA">
 
 <label>ARV</label>
 
-<input type="number"
+<input
+type="number"
 id="arv"
-value="400000">
+value="350000">
 
 <label>Purchase Price</label>
 
-<input type="number"
+<input
+type="number"
 id="price"
 value="175000">
 
 <label>Estimated Rehab</label>
 
-<input type="number"
+<input
+type="number"
 id="rehab"
 value="60000">
 
 <label>Assignment Fee</label>
 
-<input type="number"
+<input
+type="number"
 id="fee"
 value="20000">
 
 <label>Holding Months</label>
 
-<input type="number"
+<input
+type="number"
 id="months"
 value="6">
 
 <label>Monthly Holding Cost</label>
 
-<input type="number"
+<input
+type="number"
 id="holding"
 value="2000">
 
@@ -280,6 +292,68 @@ href="https://opainquiry.phila.gov/">
 
 </div>
 
+<div class="card">
+
+<h2>🧠 3 Tier Offer Engine</h2>
+
+<label>All Cash Offer (% ARV)</label>
+
+<input
+type="number"
+id="cashPct"
+value="50">
+
+<label>Seller Carry Offer (% ARV)</label>
+
+<input
+type="number"
+id="carryPct"
+value="65">
+
+<label>Down Payment (%)</label>
+
+<input
+type="number"
+id="downPct"
+value="5">
+
+<label>Interest Rate (%)</label>
+
+<input
+type="number"
+id="carryRate"
+value="5">
+
+<label>Balloon Years</label>
+
+<input
+type="number"
+id="carryBalloon"
+value="4">
+
+<label>Seller Finance Offer (% ARV)</label>
+
+<input
+type="number"
+id="financePct"
+value="75">
+
+<label>Seller Finance Rate (%)</label>
+
+<input
+type="number"
+id="financeRate"
+value="6">
+
+<label>Finance Balloon Years</label>
+
+<input
+type="number"
+id="financeBalloon"
+value="5">
+
+</div>
+
 </div>
 
 <div>
@@ -288,32 +362,25 @@ href="https://opainquiry.phila.gov/">
 
 <h2>💰 Deal Results</h2>
 
-<div class="results"
+<div
+class="results"
 id="results">
-
-<div class="result-line">
-MAO: --
-</div>
-
-<div class="result-line">
-Profit Spread: --
-</div>
-
-<div class="result-line">
-Overage: --
-</div>
-
-<div class="result-line">
-Holding Costs: --
-</div>
-
-<div class="result-line">
-ROI: --
-</div>
 
 </div>
 
 <div id="dealBadge"></div>
+
+</div>
+
+<div class="card">
+
+<h2>📄 3 Tier Results</h2>
+
+<div
+class="results"
+id="tierResults">
+
+</div>
 
 </div>
 
@@ -332,119 +399,151 @@ RO'Lyfe Holdings LLC © 2026
 
 <script>
 
-function analyzeDeal(){
+function money(x){
 
-let arv =
-parseFloat(
-document.getElementById("arv").value
+return "$"+
+Number(x).toLocaleString(
+undefined,
+{
+maximumFractionDigits:0
+}
 );
-
-let price =
-parseFloat(
-document.getElementById("price").value
-);
-
-let rehab =
-parseFloat(
-document.getElementById("rehab").value
-);
-
-let fee =
-parseFloat(
-document.getElementById("fee").value
-);
-
-let months =
-parseFloat(
-document.getElementById("months").value
-);
-
-let holding =
-parseFloat(
-document.getElementById("holding").value
-);
-
-let formula =
-parseFloat(
-document.getElementById("formula").value
-);
-
-let holdCost =
-months * holding;
-
-let mao =
-(arv * (formula/100))
-- rehab
-- fee;
-
-let spread =
-arv
-- price
-- rehab
-- fee
-- holdCost;
-
-let overage =
-arv - price;
-
-let roi =
-((spread/price)*100).toFixed(1);
-
-let score = 0;
-
-if(spread > 100000){
-
-score = 95;
-
-}else if(spread > 70000){
-
-score = 82;
-
-}else if(spread > 40000){
-
-score = 68;
-
-}else{
-
-score = 42;
 
 }
 
-let badge = '';
+function payment(
+principal,
+annualRate,
+years
+){
 
-if(score >= 80){
+let r=
+(annualRate/100)/12;
 
-badge =
+let n=
+years*12;
+
+return (
+principal*r
+)/(1-Math.pow(1+r,-n));
+
+}
+
+function analyzeDeal(){
+
+let arv=
+Number(
+document.getElementById("arv").value||0
+);
+
+let price=
+Number(
+document.getElementById("price").value||0
+);
+
+let rehab=
+Number(
+document.getElementById("rehab").value||0
+);
+
+let fee=
+Number(
+document.getElementById("fee").value||0
+);
+
+let months=
+Number(
+document.getElementById("months").value||0
+);
+
+let holding=
+Number(
+document.getElementById("holding").value||0
+);
+
+let formula=
+Number(
+document.getElementById("formula").value||70
+);
+
+let holdCost=
+months*holding;
+
+let mao=
+(arv*(formula/100))
+-
+rehab
+-
+fee;
+
+let spread=
+arv
+-
+price
+-
+rehab
+-
+fee
+-
+holdCost;
+
+let overage=
+arv-price;
+
+let roi=
+((spread/price)*100).toFixed(1);
+
+let score=42;
+
+if(spread>100000){
+
+score=95;
+
+}else if(spread>70000){
+
+score=82;
+
+}else if(spread>40000){
+
+score=68;
+
+}
+
+let badge='';
+
+if(score>=80){
+
+badge=
 '<div class="badge good">🔥 GREAT DEAL • CLOSE FAST</div>';
 
-}else if(score >= 60){
+}else if(score>=60){
 
-badge =
+badge=
 '<div class="badge mid">⚠️ SOLID DEAL • NEGOTIATE</div>';
 
 }else{
 
-badge =
+badge=
 '<div class="badge bad">❌ TIGHT DEAL • REWORK NUMBERS</div>';
 
 }
 
-document.getElementById("results").innerHTML = `
+document.getElementById("results").innerHTML=`
 
 <div class="result-line">
-MAO: $${mao.toLocaleString()}
+MAO: ${money(mao)}
 </div>
 
 <div class="result-line">
-Profit Spread: $${spread.toLocaleString()}
+Profit Spread: ${money(spread)}
 </div>
 
 <div class="result-line">
-Overage: $${overage.toLocaleString()}
+Overage: ${money(overage)}
 </div>
 
 <div class="result-line">
-Holding Costs: $${holdCost.toLocaleString()}
+Holding Costs: ${money(holdCost)}
 </div>
 
 <div class="result-line">
@@ -457,8 +556,89 @@ Deal Score: ${score}/100
 
 `;
 
-document.getElementById("dealBadge").innerHTML =
+document.getElementById("dealBadge").innerHTML=
 badge;
+
+let cashOffer=
+arv*(
+Number(document.getElementById("cashPct").value)/100
+);
+
+let sellerCarry=
+arv*(
+Number(document.getElementById("carryPct").value)/100
+);
+
+let down=
+sellerCarry*(
+Number(document.getElementById("downPct").value)/100
+);
+
+let carryLoan=
+sellerCarry-down;
+
+let carryRate=
+Number(
+document.getElementById("carryRate").value
+);
+
+let carryMonthly=
+payment(
+carryLoan,
+carryRate,
+30
+);
+
+let sellerFinance=
+arv*(
+Number(document.getElementById("financePct").value)/100
+);
+
+let financeRate=
+Number(
+document.getElementById("financeRate").value
+);
+
+let financeMonthly=
+payment(
+sellerFinance,
+financeRate,
+30
+);
+
+document.getElementById("tierResults").innerHTML=`
+
+<div class="result-line">
+All Cash Offer:
+${money(cashOffer)}
+</div>
+
+<div class="result-line">
+Seller Carry:
+${money(sellerCarry)}
+</div>
+
+<div class="result-line">
+Down Payment:
+${money(down)}
+</div>
+
+<div class="result-line">
+Seller Carry Monthly:
+${money(carryMonthly)}
+</div>
+
+<div class="result-line">
+Seller Finance:
+${money(sellerFinance)}
+</div>
+
+<div class="result-line">
+Seller Finance Monthly:
+${money(financeMonthly)}
+</div>
+
+`;
 
 }
 
