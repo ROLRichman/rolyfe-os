@@ -1,34 +1,317 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+  scroll-behavior:smooth;
+}
+
 body{
-background:#06110d;
-color:white;
-padding:20px;
+  background:#050b14;
+  color:white;
+  padding:20px;
 }
 
 .topbar{
-position:sticky;
-top:0;
-z-index:999;
-background:#081712;
-padding:14px;
-display:flex;
-gap:12px;
-justify-content:center;
-border-bottom:1px solid rgba(0,255,136,0.15);
-margin-bottom:20px;
-border-radius:14px;
+  position:sticky;
+  top:0;
+  z-index:999;
+  background:#081712;
+  padding:14px;
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  border:1px solid rgba(0,255,136,0.15);
+  margin-bottom:20px;
+  border-radius:14px;
 }
 
 .topbar a{
-color:#00ff88;
-text-decoration:none;
-font-weight:bold;
-font-size:14px;
-padding:8px 12px;
-border-radius:10px;
-transition:0.3s;
+  color:#00ff88;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  padding:8px 12px;
+  border-radius:10px;
+  transition:0.3s;
 }
 
 .topbar a:hover{
-background:#00ff88;
-color:#000;
+  background:#00ff88;
+  color:#000;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:35px;
+  padding:40px 20px;
+  border-radius:24px;
+  background:
+  linear-gradient(
+    135deg,
+    #07141f,
+    #0b1f17,
+    #102b20,
+    #07141f
+  );
+
+  border:1px solid rgba(0,255,136,0.18);
+
+  box-shadow:
+  0 0 30px rgba(0,255,136,0.08);
+}
+
+.hero h1{
+  font-size:46px;
+  color:#00ff88;
+  margin-bottom:12px;
+}
+
+.hero p{
+  color:#c8d2dc;
+  line-height:1.7;
+  max-width:900px;
+  margin:auto;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+  repeat(auto-fit,minmax(240px,1fr));
+
+  gap:20px;
+}
+
+.card{
+  background:#111827;
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  border-radius:20px;
+
+  padding:24px;
+
+  color:white;
+
+  text-decoration:none;
+
+  transition:0.3s;
+
+  box-shadow:
+  0 0 15px rgba(0,0,0,0.3);
+}
+
+.card:hover{
+  transform:translateY(-6px);
+
+  border-color:#00ff88;
+
+  box-shadow:
+  0 0 25px rgba(0,255,136,0.25);
+
+  background:#132033;
+}
+
+.card h2{
+  font-size:22px;
+  margin-bottom:12px;
+  color:#00ff88;
+}
+
+.card p{
+  font-size:14px;
+  line-height:1.6;
+  color:#cfcfcf;
+  margin-bottom:18px;
+}
+
+.btn{
+  display:inline-block;
+
+  width:100%;
+
+  text-align:center;
+
+  text-decoration:none;
+
+  background:
+  linear-gradient(
+    135deg,
+    #00d9ff,
+    #00ff88
+  );
+
+  color:#000;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  font-weight:bold;
+
+  border:none;
+
+  cursor:pointer;
+}
+
+.badge{
+  display:inline-block;
+
+  padding:7px 14px;
+
+  border-radius:999px;
+
+  background:#00ff88;
+
+  color:#000;
+
+  font-weight:bold;
+
+  font-size:12px;
+}
+
+.footer{
+  margin-top:50px;
+
+  text-align:center;
+
+  color:#6f7b8b;
+
+  font-size:13px;
+
+  padding:25px;
+}
+
+.quicknav{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:35px;
+}
+
+.quicknav a{
+  text-decoration:none;
+
+  background:#0f172a;
+
+  color:#00ff88;
+
+  padding:12px 18px;
+
+  border-radius:14px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+  border:
+  1px solid rgba(0,255,136,0.15);
+
+  transition:0.3s;
+}
+
+.quicknav a:hover{
+  background:#00ff88;
+  color:#000;
+  transform:translateY(-3px);
+}
+
+.repair-banner{
+  margin-bottom:35px;
+
+  padding:28px;
+
+  border-radius:24px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #132033,
+    #0f172a
+  );
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:20px;
+
+  box-shadow:
+  0 0 25px rgba(0,0,0,0.3);
+}
+
+.repair-text h2{
+  font-size:30px;
+  color:#00ff88;
+  margin-bottom:10px;
+}
+
+.repair-text p{
+  max-width:700px;
+  line-height:1.7;
+  color:#d0d7df;
+  font-size:15px;
+}
+
+.repair-btn{
+  text-decoration:none;
+
+  background:#00ff88;
+
+  color:#000;
+
+  padding:16px 28px;
+
+  border-radius:16px;
+
+  font-weight:bold;
+
+  font-size:15px;
+
+  transition:0.3s;
+
+  box-shadow:
+  0 0 20px rgba(0,255,136,0.25);
+}
+
+.repair-btn:hover{
+  transform:
+  translateY(-4px)
+  scale(1.03);
+
+  background:white;
+}
+
+@media(max-width:768px){
+
+  body{
+    padding:12px;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .topbar a{
+    font-size:12px;
+    padding:9px 10px;
+  }
+
+  .repair-banner{
+    padding:22px;
+  }
+
+  .repair-text h2{
+    font-size:24px;
+  }
 }
