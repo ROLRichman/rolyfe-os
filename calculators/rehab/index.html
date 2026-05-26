@@ -1,78 +1,495 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>RO'Lyfe Calculators</title>  
-<style>  
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}  
-body{background:#07110d;color:#fff;padding:16px}  
-.topbar{position:sticky;top:0;z-index:99;background:#081712;padding:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;border:1px solid rgba(0,255,136,.18);border-radius:14px;margin-bottom:18px}  
-.topbar a{color:#00ff88;text-decoration:none;font-weight:bold;font-size:14px;padding:8px 12px;border-radius:10px}  
-.topbar a:hover{background:#00ff88;color:#000}  
-.header{text-align:center;margin:28px 0}  
-.header h1{font-size:34px;color:#00ff88;margin-bottom:8px}  
-.header p{color:#c9ffe0;line-height:1.5}  
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:1100px;margin:auto}  
-.card{background:#101c18;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:20px;box-shadow:0 0 18px rgba(0,0,0,.25)}  
-.card h2{color:#00ff88;margin-bottom:10px}  
-.card p{color:#d8ffe8;line-height:1.5;margin-bottom:16px}  
-.btn{display:block;text-align:center;text-decoration:none;background:linear-gradient(135deg,#00d9ff,#00ff88);color:#000;padding:14px;border-radius:14px;font-weight:bold}  
-.footer{text-align:center;color:#8ebfa0;margin-top:30px;font-size:13px}  
-</style>  
-</head>  <body>  <div class="topbar">  
-<a href="../">🏠 Home</a>  
-<a href="../contracts/">📄 Contracts</a>  
-<a href="../funding/">💰 Funding</a>  
-<a href="../forms/">📂 Forms</a>  
-<a href="../trading/">📈 Trading</a>  
-</div>  <div class="header">  
-<h1>🧮 RO'Lyfe Calculators</h1>  
-<p>Deal math, rehab budgets, offer strategy, profit spreads, and funding-ready numbers in projected numbers in one place.</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>RO'Lyfe Rehab Budget Calculator</title>
+
+<link rel="stylesheet" href="../../styles.css">
+
+<style>
+
+.table-wrap{
+overflow:auto;
+border-radius:14px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:760px;
+background:#0f1a16;
+}
+
+th{
+background:#00ff88;
+color:#000;
+padding:12px;
+text-align:left;
+font-size:14px;
+}
+
+td{
+border-bottom:1px solid rgba(255,255,255,.08);
+padding:8px;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#1b2a25;
+color:white;
+font-size:15px;
+}
+
+textarea{
+min-height:60px;
+resize:vertical;
+}
+
+.summary{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(180px,1fr));
+
+gap:12px;
+margin-top:20px;
+}
+
+.result{
+background:#06110d;
+border:1px solid rgba(0,255,136,.25);
+border-radius:16px;
+padding:16px;
+text-align:center;
+}
+
+.result h3{
+color:#00ff88;
+font-size:15px;
+margin-bottom:8px;
+}
+
+.result p{
+font-size:24px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<div class="topbar">
+
+<a href="../../">🏠 Home</a>
+
+<a href="../">🧮 Calculators</a>
+
+<a href="../../deal-terminal/">🏡 Deals</a>
+
+<a href="../../funding/">💰 Funding</a>
+
+<a href="../../contracts/">📄 Contracts</a>
+
 </div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>🏗️ RO'Lyfe Rehab Budget Calculator</h1>
+
+<p>
+
+COGO-style rehab breakdown,
+repair scope notes,
+contingency,
+final rehab totals,
+and projected spread analysis.
+
+</p>
+
+</div>
+
+<!-- PROPERTY INFO -->
+
+<div class="card">
+
+<h2>🏡 Property Information</h2>
 
 <div class="grid">
 
-<div class="card">
-<h2>🏗️ Rehab Budget Calculator</h2>
-<p>COGO-style rehab breakdown with line items, contingency, buffer, final rehab total, and projected spread.</p>
-<a class="btn" href="../deal-terminal/">Open Rehab Calculator</a>
-</div>
+<div>
 
-<div class="card">
-<h2>🏡 Deal Analyzer</h2>
-<p>Analyze ARV, purchase price, repairs, spread, MAO, and estimated profit.</p>
-<a class="btn" href="../deal-terminal/">Open Deal Terminal</a>
-</div>
+<label>Property Address</label>
 
-<div class="card">
-<h2>💰 Funding Calculator</h2>
-<p>Review borrower cash to close, rehab budget, loan amount, reserves, and lender-ready numbers.</p>
-<a class="btn" href="../funding/">Open Funding Hub</a>
-</div>
-
-<div class="card">
-<h2>📈 Trading Calculator</h2>
-<p>Options risk, stock risk, targets, stop planning, and RO'Lyfe ladder execution.</p>
-<a class="btn" href="../trading/">Open Trading Tools</a>
-</div>
-
-<div class="card">
-<h2>📄 Contract Math</h2>
-<p>Assignment fee, broker fee, offer terms, contract docs, and closing packet resources.</p>
-<a class="btn" href="../contracts/">Open Contracts</a>
-</div>
-
-<div class="card">
-<h2>📂 Forms & Intake</h2>
-<p>Loan intake, document upload, partner forms, borrower forms, and contractor submission tools.</p>
-<a class="btn" href="../forms/">Open Forms</a>
-</div>
+<input
+type="text"
+id="address"
+placeholder="123 Main St">
 
 </div>
+
+<div>
+
+<label>ARV</label>
+
+<input
+type="number"
+id="arv"
+placeholder="350000">
+
+</div>
+
+<div>
+
+<label>Purchase Price</label>
+
+<input
+type="number"
+id="purchase"
+placeholder="140000">
+
+</div>
+
+<div>
+
+<label>Contractor</label>
+
+<input
+type="text"
+id="contractor"
+placeholder="RJ Construction">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- REHAB TABLE -->
+
+<div class="card">
+
+<h2>🧾 Rehab Scope Breakdown</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Item #</th>
+
+<th>Description</th>
+
+<th>Estimate Cost</th>
+
+<th>Scope Notes</th>
+
+</tr>
+
+</thead>
+
+<tbody id="rehabTable"></tbody>
+
+</table>
+
+</div>
+
+<button class="btn"
+onclick="calculateRehab()">
+
+🧠 Calculate Rehab
+
+</button>
+
+<br><br>
+
+<button class="btn"
+onclick="resetRehab()">
+
+♻️ Reset Rehab
+
+</button>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="card">
+
+<h2>📊 Rehab Summary</h2>
+
+<div class="grid">
+
+<div>
+
+<label>Contingency %</label>
+
+<input
+type="number"
+id="contingency"
+value="10">
+
+</div>
+
+<div>
+
+<label>Extra Buffer Cost</label>
+
+<input
+type="number"
+id="buffer"
+value="0">
+
+</div>
+
+</div>
+
+<div class="summary">
+
+<div class="result">
+
+<h3>Rehab Subtotal</h3>
+
+<p id="subtotal">$0</p>
+
+</div>
+
+<div class="result">
+
+<h3>Contingency</h3>
+
+<p id="contingencyTotal">$0</p>
+
+</div>
+
+<div class="result">
+
+<h3>Final Rehab</h3>
+
+<p id="finalRehab">$0</p>
+
+</div>
+
+<div class="result">
+
+<h3>Projected Spread</h3>
+
+<p id="spread">$0</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- NOTES -->
+
+<div class="card">
+
+<h2>🧠 Global Rehab Notes</h2>
+
+<textarea
+id="globalNotes"
+placeholder="Add lender notes, contractor notes, roof comments, access instructions, timelines, etc."></textarea>
+
+</div>
+
+<!-- FOOTER -->
 
 <div class="footer">
-RO'Lyfe Holdings LLC © 2026 | Calculator Command Center
+
+RO'Lyfe Holdings LLC © 2026
+| Rehab Execution System
+
 </div>
+
+<script>
+
+const rehabItems = [
+
+[264,"Architect"],
+[160,"Asphalt & Paving"],
+[848,"Basement"],
+[740,"Bathroom Accessories / Mirror"],
+[840,"Bathroom Tile"],
+[550,"Bathroom Vanity & Countertop"],
+[352,"Carpentry Rough"],
+[700,"Carpets"],
+[418,"Ceiling Work"],
+[384,"Demolition"],
+[704,"Drywall / Sheetrock"],
+[213,"Dumpster"],
+[672,"Electrical Finish"],
+[680,"Electrical Rough"],
+[600,"Exterior Doors"],
+[706,"Exterior Painting"],
+[710,"Flooring"],
+[650,"HVAC"],
+[576,"Insulation"],
+[712,"Interior Painting"],
+[842,"Kitchen"],
+[770,"Kitchen Appliances"],
+[530,"Kitchen Cabinets"],
+[702,"Kitchen Counter Tops"],
+[398,"Landscaping"],
+[646,"Light Fixtures"],
+[466,"Masonry"],
+[186,"Permit Fees"],
+[642,"Plumbing Finish"],
+[654,"Plumbing Rough"],
+[582,"Roofing"],
+[552,"Siding"],
+[614,"Sinks / Toilets / Tubs"],
+[510,"Structural"],
+[412,"Water Heater"],
+[618,"Windows"]
+
+];
+
+const rehabTable =
+document.getElementById("rehabTable");
+
+rehabItems.forEach(item=>{
+
+rehabTable.innerHTML += `
+
+<tr>
+
+<td>${item[0]}</td>
+
+<td>${item[1]}</td>
+
+<td>
+
+<input
+class="costInput"
+type="number"
+placeholder="0">
+
+</td>
+
+<td>
+
+<textarea
+placeholder="Scope notes..."></textarea>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+function money(x){
+
+return "$" +
+Number(x).toLocaleString(undefined,{
+
+minimumFractionDigits:2,
+maximumFractionDigits:2
+
+});
+
+}
+
+function calculateRehab(){
+
+let subtotal = 0;
+
+document
+.querySelectorAll(".costInput")
+.forEach(input=>{
+
+subtotal += Number(input.value || 0);
+
+});
+
+const contingencyPercent =
+Number(
+document.getElementById("contingency").value || 0
+);
+
+const buffer =
+Number(
+document.getElementById("buffer").value || 0
+);
+
+const contingencyAmount =
+subtotal * (contingencyPercent / 100);
+
+const finalRehab =
+subtotal + contingencyAmount + buffer;
+
+const arv =
+Number(
+document.getElementById("arv").value || 0
+);
+
+const purchase =
+Number(
+document.getElementById("purchase").value || 0
+);
+
+const spread =
+arv - purchase - finalRehab;
+
+document.getElementById("subtotal")
+.innerText = money(subtotal);
+
+document.getElementById("contingencyTotal")
+.innerText = money(contingencyAmount);
+
+document.getElementById("finalRehab")
+.innerText = money(finalRehab);
+
+document.getElementById("spread")
+.innerText = money(spread);
+
+}
+
+function resetRehab(){
+
+document
+.querySelectorAll(".costInput")
+.forEach(input=>{
+
+input.value = "";
+
+});
+
+document
+.querySelectorAll("textarea")
+.forEach(t=>{
+
+t.value = "";
+
+});
+
+document.getElementById("buffer").value = 0;
+
+calculateRehab();
+
+}
+
+</script>
 
 </body>
 </html>
