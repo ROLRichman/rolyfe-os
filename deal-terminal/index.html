@@ -1,46 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>RO'Lyfe Deal Analyzer</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif
-}
+<link rel="stylesheet" href="../styles.css">
 
-body{
-background:#050816;
-color:#fff;
-padding:20px;
-}
+<style>
 
 .container{
 max-width:1450px;
 margin:auto;
-}
-
-.hero{
-background:linear-gradient(135deg,#0f172a,#111827,#1e293b);
-padding:25px;
-border-radius:22px;
-margin-bottom:20px;
-border:1px solid rgba(255,255,255,.08);
-}
-
-.hero h1{
-font-size:34px;
-margin-bottom:10px;
-color:#00e5ff;
-}
-
-.hero p{
-opacity:.85;
-line-height:1.6;
 }
 
 .grid{
@@ -70,7 +45,9 @@ font-size:14px;
 opacity:.85;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
 width:100%;
 padding:14px;
 border:none;
@@ -91,7 +68,12 @@ padding:16px;
 margin-top:20px;
 border:none;
 border-radius:14px;
-background:linear-gradient(90deg,#00e5ff,#00ff9d);
+background:linear-gradient(
+90deg,
+#00e5ff,
+#00ff9d
+);
+
 color:#000;
 font-size:17px;
 font-weight:bold;
@@ -108,23 +90,25 @@ line-height:1.8;
 
 .result-line{
 padding:10px;
-border-bottom:1px solid rgba(255,255,255,.08);
+border-bottom:
+1px solid rgba(255,255,255,.08);
 }
 
-.green{
-color:#00ff9d;
+.quick-links{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:18px;
 }
 
-.yellow{
-color:#ffe066;
-}
-
-.red{
-color:#ff5d73;
-}
-
-.blue{
-color:#00e5ff;
+.quick-links a{
+text-decoration:none;
+padding:14px;
+border-radius:14px;
+background:#1f2937;
+color:#fff;
+text-align:center;
+font-weight:bold;
 }
 
 .badge{
@@ -150,46 +134,49 @@ background:#3b1218;
 color:#ff5d73;
 }
 
-.quick-links{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin-top:18px;
-}
-
-.quick-links a{
-text-decoration:none;
-padding:14px;
-border-radius:14px;
-background:#1f2937;
-color:#fff;
-text-align:center;
-font-weight:bold;
-}
-
 @media(max-width:980px){
+
 .grid{
 grid-template-columns:1fr;
 }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
-<div class="container">
+<div class="topbar">
+
+<a href="../">🏠 Home</a>
+
+<a href="../calculators/">🧮 Calculators</a>
+
+<a href="../funding/">💰 Funding</a>
+
+<a href="../forms/">📂 Forms</a>
+
+<a href="../contracts/">📄 Contracts</a>
+
+</div>
 
 <div class="hero">
+
 <h1>🏡 RO'Lyfe Deal Analyzer</h1>
 
 <p>
-Analyze distressed properties, calculate MAO, overage, cash offers,
-flip spreads, refinance opportunities, monthly holding costs,
+Analyze ARV, rehab, MAO,
+assignment spreads,
+holding costs,
+cash offers,
 and investor profit margins.
-Built for wholesalers, contractors, lenders, and acquisition teams.
 </p>
 
 </div>
+
+<div class="container">
 
 <div class="grid">
 
@@ -200,46 +187,94 @@ Built for wholesalers, contractors, lenders, and acquisition teams.
 <h2>📊 Property Inputs</h2>
 
 <label>Property Address</label>
-<input id="address" value="6838 Ogontz Ave Philadelphia PA">
 
-<label>ARV (After Repair Value)</label>
-<input type="number" id="arv" value="400000">
+<input id="address"
+value="6838 Ogontz Ave Philadelphia PA">
 
-<label>Asking Price</label>
-<input type="number" id="price" value="175000">
+<label>ARV</label>
+
+<input type="number"
+id="arv"
+value="400000">
+
+<label>Purchase Price</label>
+
+<input type="number"
+id="price"
+value="175000">
 
 <label>Estimated Rehab</label>
-<input type="number" id="rehab" value="60000">
+
+<input type="number"
+id="rehab"
+value="60000">
 
 <label>Assignment Fee</label>
-<input type="number" id="fee" value="20000">
+
+<input type="number"
+id="fee"
+value="20000">
 
 <label>Holding Months</label>
-<input type="number" id="months" value="6">
+
+<input type="number"
+id="months"
+value="6">
 
 <label>Monthly Holding Cost</label>
-<input type="number" id="holding" value="2000">
+
+<input type="number"
+id="holding"
+value="2000">
 
 <label>Offer Formula</label>
+
 <select id="formula">
-<option value="70">70% Rule</option>
-<option value="65">65% Rule</option>
+
+<option value="70">
+70% Rule
+</option>
+
+<option value="65">
+65% Rule
+</option>
+
 </select>
 
-<label>Seller Notes</label>
-<textarea id="notes">Roof replacement needed. Mt Airy area. Strong ARV potential.</textarea>
+<label>Notes</label>
 
-<button onclick="analyzeDeal()">🔥 Analyze Deal</button>
+<textarea id="notes">
+Roof replacement needed.
+Strong ARV potential.
+</textarea>
+
+<button onclick="analyzeDeal()">
+
+🔥 Analyze Deal
+
+</button>
 
 <div class="quick-links">
 
-<a target="_blank" href="https://www.zillow.com">🏠 Zillow</a>
+<a target="_blank"
+href="https://www.zillow.com/">
+🏠 Zillow
+</a>
 
-<a target="_blank" href="https://www.redfin.com">📍 Redfin</a>
+<a target="_blank"
+href="https://www.redfin.com/">
+📍 Redfin
+</a>
 
-<a target="_blank" href="https://property.phila.gov">🏛 Philly Property</a>
+<a target="_blank"
+href="https://property.phila.gov/">
+🏛 Philly Property
+</a>
 
-<a target="_blank" href="https://opainquiry.phila.gov">📑 OPA</a>
+<a target="_blank"
+href="https://opainquiry.phila.gov/">
+📑 OPA
+</a>
 
 </div>
 
@@ -253,15 +288,28 @@ Built for wholesalers, contractors, lenders, and acquisition teams.
 
 <h2>💰 Deal Results</h2>
 
-<div class="results" id="results">
+<div class="results"
+id="results">
 
-<div class="result-line">MAO: --</div>
-<div class="result-line">Profit Spread: --</div>
-<div class="result-line">Overage: --</div>
-<div class="result-line">Holding Costs: --</div>
-<div class="result-line">Estimated Net: --</div>
-<div class="result-line">ROI: --</div>
-<div class="result-line">Deal Score: --</div>
+<div class="result-line">
+MAO: --
+</div>
+
+<div class="result-line">
+Profit Spread: --
+</div>
+
+<div class="result-line">
+Overage: --
+</div>
+
+<div class="result-line">
+Holding Costs: --
+</div>
+
+<div class="result-line">
+ROI: --
+</div>
 
 </div>
 
@@ -269,25 +317,16 @@ Built for wholesalers, contractors, lenders, and acquisition teams.
 
 </div>
 
-<div class="card">
-
-<h2>🧠 Investor Breakdown</h2>
-
-<div class="results" id="investor">
-
-<div class="result-line">Cash Offer: --</div>
-<div class="result-line">Seller Finance Offer: --</div>
-<div class="result-line">Flip Exit Potential: --</div>
-<div class="result-line">Refi Exit Potential: --</div>
-<div class="result-line">Contractor Spread: --</div>
-
 </div>
 
 </div>
 
 </div>
 
-</div>
+<div class="footer">
+
+RO'Lyfe Holdings LLC © 2026
+| Deal Execution System
 
 </div>
 
@@ -295,116 +334,131 @@ Built for wholesalers, contractors, lenders, and acquisition teams.
 
 function analyzeDeal(){
 
-let arv=parseFloat(document.getElementById("arv").value);
-let price=parseFloat(document.getElementById("price").value);
-let rehab=parseFloat(document.getElementById("rehab").value);
-let fee=parseFloat(document.getElementById("fee").value);
+let arv =
+parseFloat(
+document.getElementById("arv").value
+);
 
-let months=parseFloat(document.getElementById("months").value);
-let holding=parseFloat(document.getElementById("holding").value);
+let price =
+parseFloat(
+document.getElementById("price").value
+);
 
-let formula=parseFloat(document.getElementById("formula").value);
+let rehab =
+parseFloat(
+document.getElementById("rehab").value
+);
 
-let holdCost=months*holding;
+let fee =
+parseFloat(
+document.getElementById("fee").value
+);
 
-let mao=(arv*(formula/100))-rehab-fee;
+let months =
+parseFloat(
+document.getElementById("months").value
+);
 
-let spread=arv-price-rehab-fee-holdCost;
+let holding =
+parseFloat(
+document.getElementById("holding").value
+);
 
-let overage=arv-price;
+let formula =
+parseFloat(
+document.getElementById("formula").value
+);
 
-let roi=((spread/price)*100).toFixed(1);
+let holdCost =
+months * holding;
 
-let score=0;
+let mao =
+(arv * (formula/100))
+- rehab
+- fee;
 
-if(spread>100000){
-score=95;
+let spread =
+arv
+- price
+- rehab
+- fee
+- holdCost;
+
+let overage =
+arv - price;
+
+let roi =
+((spread/price)*100).toFixed(1);
+
+let score = 0;
+
+if(spread > 100000){
+
+score = 95;
+
+}else if(spread > 70000){
+
+score = 82;
+
+}else if(spread > 40000){
+
+score = 68;
+
+}else{
+
+score = 42;
+
 }
-else if(spread>70000){
-score=82;
-}
-else if(spread>40000){
-score=68;
-}
-else{
-score=42;
+
+let badge = '';
+
+if(score >= 80){
+
+badge =
+'<div class="badge good">🔥 GREAT DEAL • CLOSE FAST</div>';
+
+}else if(score >= 60){
+
+badge =
+'<div class="badge mid">⚠️ SOLID DEAL • NEGOTIATE</div>';
+
+}else{
+
+badge =
+'<div class="badge bad">❌ TIGHT DEAL • REWORK NUMBERS</div>';
+
 }
 
-let badge='';
+document.getElementById("results").innerHTML = `
 
-if(score>=80){
-badge='<div class="badge good">🔥 GREAT DEAL • CLOSE FAST</div>';
-}
-else if(score>=60){
-badge='<div class="badge mid">⚠️ SOLID DEAL • NEGOTIATE</div>';
-}
-else{
-badge='<div class="badge bad">❌ TIGHT DEAL • REWORK NUMBERS</div>';
-}
-
-document.getElementById("results").innerHTML=`
-
-<div class="result-line green">
+<div class="result-line">
 MAO: $${mao.toLocaleString()}
 </div>
 
-<div class="result-line blue">
+<div class="result-line">
 Profit Spread: $${spread.toLocaleString()}
 </div>
 
-<div class="result-line yellow">
+<div class="result-line">
 Overage: $${overage.toLocaleString()}
 </div>
 
-<div class="result-line red">
+<div class="result-line">
 Holding Costs: $${holdCost.toLocaleString()}
 </div>
 
-<div class="result-line green">
-Estimated Net: $${spread.toLocaleString()}
-</div>
-
-<div class="result-line blue">
+<div class="result-line">
 ROI: ${roi}%
 </div>
 
-<div class="result-line yellow">
+<div class="result-line">
 Deal Score: ${score}/100
 </div>
 
 `;
 
-document.getElementById("dealBadge").innerHTML=badge;
-
-let cashOffer=arv*.70-rehab;
-let sellerFinance=arv*.85;
-let flip=spread;
-let refi=arv*.75-price;
-let contractor=spread-fee;
-
-document.getElementById("investor").innerHTML=`
-
-<div class="result-line green">
-Cash Offer: $${cashOffer.toLocaleString()}
-</div>
-
-<div class="result-line yellow">
-Seller Finance Offer: $${sellerFinance.toLocaleString()}
-</div>
-
-<div class="result-line blue">
-Flip Exit Potential: $${flip.toLocaleString()}
-</div>
-
-<div class="result-line green">
-Refi Exit Potential: $${refi.toLocaleString()}
-</div>
-
-<div class="result-line yellow">
-Contractor Spread: $${contractor.toLocaleString()}
-</div>
-
-`;
+document.getElementById("dealBadge").innerHTML =
+badge;
 
 }
 
