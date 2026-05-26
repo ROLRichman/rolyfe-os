@@ -1,30 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0"/>
+
 <title>RO'Lyfe OS</title>
 
 <link rel="stylesheet" href="styles.css"/>
 
+<style>
+
+/* HERO */
+
+.command-center{
+position:relative;
+overflow:hidden;
+
+padding:60px 25px;
+
+border-radius:28px;
+
+margin-bottom:35px;
+
+background:
+linear-gradient(
+135deg,
+#07141f,
+#0c1f17,
+#102b20,
+#09131f
+);
+
+border:
+1px solid rgba(0,255,136,0.15);
+
+box-shadow:
+0 0 45px rgba(0,255,136,0.08);
+}
+
+.command-center::before{
+content:"";
+
+position:absolute;
+
+width:320px;
+height:320px;
+
+background:
+rgba(0,255,136,0.08);
+
+filter:blur(80px);
+
+top:-120px;
+left:-120px;
+
+border-radius:50%;
+}
+
+.command-center::after{
+content:"";
+
+position:absolute;
+
+width:260px;
+height:260px;
+
+background:
+rgba(0,217,255,0.08);
+
+filter:blur(70px);
+
+bottom:-120px;
+right:-120px;
+
+border-radius:50%;
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+text-align:center;
+}
+
+.hero-content h1{
+font-size:58px;
+margin-bottom:12px;
+color:#00ff88;
+
+text-shadow:
+0 0 25px rgba(0,255,136,0.35);
+}
+
+.hero-content p{
+max-width:950px;
+margin:auto;
+line-height:1.8;
+font-size:16px;
+color:#d6dde5;
+}
+
+/* STATUS BAR */
+
+.status-bar{
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:18px;
+
+margin:30px 0;
+}
+
+.status-card{
+background:#111827;
+
+padding:20px;
+
+border-radius:20px;
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+box-shadow:
+0 0 15px rgba(0,0,0,0.25);
+}
+
+.status-card h3{
+font-size:15px;
+margin-bottom:10px;
+color:#00ff88;
+}
+
+.status-card p{
+font-size:28px;
+font-weight:bold;
+}
+
+/* FEATURE PANEL */
+
+.feature-panel{
+margin-bottom:35px;
+
+padding:28px;
+
+border-radius:24px;
+
+background:
+linear-gradient(
+135deg,
+#132033,
+#0f172a
+);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:20px;
+}
+
+.feature-text h2{
+font-size:34px;
+margin-bottom:12px;
+color:#00ff88;
+}
+
+.feature-text p{
+max-width:760px;
+line-height:1.8;
+color:#d6dde5;
+}
+
+.feature-buttons{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
+
+.feature-buttons a{
+text-decoration:none;
+
+padding:15px 24px;
+
+border-radius:16px;
+
+font-weight:bold;
+
+transition:0.3s;
+}
+
+.primary-btn{
+background:
+linear-gradient(
+135deg,
+#00d9ff,
+#00ff88
+);
+
+color:#000;
+}
+
+.secondary-btn{
+background:#101c2e;
+color:#fff;
+
+border:
+1px solid rgba(0,255,136,0.15);
+}
+
+.feature-buttons a:hover{
+transform:translateY(-4px);
+}
+
+/* SECTION TITLE */
+
+.section-title{
+font-size:30px;
+margin-bottom:22px;
+color:#00ff88;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(260px,1fr));
+
+gap:20px;
+}
+
+/* CARDS */
+
+.card{
+position:relative;
+
+overflow:hidden;
+
+background:#111827;
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+border-radius:22px;
+
+padding:24px;
+
+transition:0.3s;
+
+box-shadow:
+0 0 18px rgba(0,0,0,0.25);
+}
+
+.card::before{
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:4px;
+
+background:#00ff88;
+
+opacity:0;
+
+transition:0.3s;
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+.card:hover{
+transform:translateY(-6px);
+
+border-color:#00ff88;
+
+box-shadow:
+0 0 30px rgba(0,255,136,0.18);
+
+background:#132033;
+}
+
+.card h2{
+font-size:24px;
+margin-bottom:14px;
+color:#00ff88;
+}
+
+.card p{
+font-size:14px;
+line-height:1.7;
+color:#d4d4d4;
+margin-bottom:18px;
+}
+
+.card-buttons{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.open-btn,
+.download-btn{
+flex:1;
+
+text-align:center;
+
+text-decoration:none;
+
+padding:14px;
+
+border-radius:14px;
+
+font-weight:bold;
+
+transition:0.3s;
+}
+
+.open-btn{
+background:
+linear-gradient(
+135deg,
+#00d9ff,
+#00ff88
+);
+
+color:#000;
+}
+
+.download-btn{
+background:#0f172a;
+color:white;
+
+border:
+1px solid rgba(255,255,255,0.08);
+}
+
+.open-btn:hover,
+.download-btn:hover{
+transform:translateY(-3px);
+}
+
+/* LIVE WATCH */
+
+.watchlist{
+margin-top:35px;
+
+padding:24px;
+
+border-radius:22px;
+
+background:#0f172a;
+
+border:
+1px solid rgba(255,255,255,0.08);
+}
+
+.watchlist h2{
+margin-bottom:18px;
+color:#00ff88;
+}
+
+.tickers{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.ticker{
+padding:10px 14px;
+
+border-radius:999px;
+
+background:#111827;
+
+border:
+1px solid rgba(0,255,136,0.12);
+
+font-size:13px;
+
+font-weight:bold;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:50px;
+
+text-align:center;
+
+color:#6f7b8b;
+
+font-size:13px;
+
+padding:25px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:38px;
+}
+
+.feature-text h2{
+font-size:26px;
+}
+
+.section-title{
+font-size:24px;
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<!-- HERO -->
+<!-- TOPBAR -->
 
-<div class="hero">
-
-<h1>🔥 RO'Lyfe OS</h1>
-
-<p>
-Workflow • Funding • Contracts • Systems • Execution • Trading • AI • Automation
-</p>
-
-</div>
-
-<!-- QUICK NAV -->
-
-<div class="quicknav">
+<div class="topbar">
 
 <a href="./forms/">📝 Forms</a>
 
@@ -38,239 +452,315 @@ Workflow • Funding • Contracts • Systems • Execution • Trading • AI 
 
 <a href="./contracts/">📄 Contracts</a>
 
+<a href="./calculators/">🧮 Calculators</a>
+
 </div>
 
-<!-- REPAIR SYSTEM -->
+<!-- HERO -->
 
-<div class="repair-banner">
+<div class="command-center">
 
-<div class="repair-text">
+<div class="hero-content">
+
+<h1>🔥 RO'Lyfe OS</h1>
+
+<p>
+Private Capital • Real Estate • Trading • AI • Automation • Funding • Execution Systems
+Built as a unified operating system for contractors, investors, lenders, brokers, traders, and future-focused builders.
+</p>
+
+</div>
+
+</div>
+
+<!-- STATUS -->
+
+<div class="status-bar">
+
+<div class="status-card">
+<h3>🏡 Active Systems</h3>
+<p>17</p>
+</div>
+
+<div class="status-card">
+<h3>💰 Funding Links</h3>
+<p>25+</p>
+</div>
+
+<div class="status-card">
+<h3>📄 Contracts Ready</h3>
+<p>6</p>
+</div>
+
+<div class="status-card">
+<h3>🤖 AI Expansion</h3>
+<p>LIVE</p>
+</div>
+
+</div>
+
+<!-- FEATURE -->
+
+<div class="feature-panel">
+
+<div class="feature-text">
 
 <h2>🛠 Contractor Repair Breakdown</h2>
 
 <p>
 Access the RO'Lyfe rehab scope system, contractor repair line items,
-inspection workflow, budget analysis, COGO-style breakdowns,
-and funding-ready rehab estimates.
+inspection workflow, budget analysis,
+COGO-style breakdowns,
+funding-ready rehab estimates,
+and investor repair execution tools.
 </p>
 
 </div>
 
-<a class="repair-btn" href="./calculators/">
+<div class="feature-buttons">
 
-OPEN REPAIR SYSTEM →
+<a class="primary-btn"
+href="./calculators/">
+
+OPEN REPAIR SYSTEM
+
+</a>
+
+<a class="secondary-btn"
+href="./deal-terminal/">
+
+OPEN DEAL TERMINAL
 
 </a>
 
 </div>
 
-<!-- MAIN GRID -->
+</div>
+
+<!-- MAIN SYSTEMS -->
+
+<h2 class="section-title">
+⚡ Command Systems
+</h2>
 
 <div class="grid">
 
-<a class="card" href="./contracts/">
+<div class="card">
 
 <h2>📄 Contracts</h2>
 
 <p>
-Assignments, PSA agreements, disclosures, and closing documents.
+Assignments, PSA agreements,
+disclosures,
+closing packets,
+and legal execution docs.
 </p>
 
-<span class="badge">OPEN</span>
+<div class="card-buttons">
+
+<a class="open-btn"
+href="./contracts/">
+
+OPEN
 
 </a>
 
-<a class="card" href="./funding/">
+<a class="download-btn"
+href="./docs/">
+
+DOCS
+
+</a>
+
+</div>
+
+</div>
+
+<div class="card">
 
 <h2>💰 Funding</h2>
 
 <p>
-Private lenders, business funding, credit, and capital resources.
+Business funding,
+private lenders,
+credit systems,
+loan automation,
+and borrower intake.
 </p>
 
-<span class="badge">OPEN</span>
+<div class="card-buttons">
+
+<a class="open-btn"
+href="./funding/">
+
+OPEN
 
 </a>
 
-<a class="card" href="./forms/">
+<a class="download-btn"
+href="./forms/">
 
-<h2>📝 Forms</h2>
-
-<p>
-Lead intake, applications, uploads, and onboarding systems.
-</p>
-
-<span class="badge">OPEN</span>
+APPLY
 
 </a>
 
-<a class="card" href="./deal-terminal/">
+</div>
+
+</div>
+
+<div class="card">
 
 <h2>🏡 Deal Terminal</h2>
 
 <p>
-Analyze deals, calculate ARV, MAO, repairs, and profits.
+Analyze ARV,
+MAO,
+rehab spreads,
+holding costs,
+investor profit,
+and offer strategy.
 </p>
 
-<span class="badge">LIVE</span>
+<div class="card-buttons">
+
+<a class="open-btn"
+href="./deal-terminal/">
+
+OPEN
 
 </a>
 
-<a class="card" href="./trading/">
+<a class="download-btn"
+href="./calculators/">
 
-<h2>📈 Trading</h2>
+TOOLS
+
+</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📈 Trading Terminal</h2>
 
 <p>
-Market terminal, watchlists, news, options, and analysis tools.
+Options ladder execution,
+TradingView charts,
+watchlists,
+risk management,
+and trading systems.
 </p>
 
-<span class="badge">LIVE</span>
+<div class="card-buttons">
+
+<a class="open-btn"
+href="./trading/">
+
+OPEN
 
 </a>
 
-<a class="card" href="./videos/">
+<a class="download-btn"
+href="./videos/">
 
-<h2>🎥 Videos</h2>
+TRAINING
+
+</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🎥 Video Hub</h2>
 
 <p>
-Training, walkthroughs, educational content, and media hub.
+Training videos,
+AI future videos,
+funding education,
+real estate walkthroughs,
+and execution content.
 </p>
 
-<span class="badge">WATCH</span>
+<div class="card-buttons">
+
+<a class="open-btn"
+href="./videos/">
+
+WATCH
 
 </a>
 
-<a class="card" href="./resources/">
+<a class="download-btn"
+href="./resources/">
 
-<h2>📚 Resources</h2>
-
-<p>
-Tools, websites, calculators, software, and workflow systems.
-</p>
-
-<span class="badge">TOOLS</span>
+RESOURCES
 
 </a>
 
-<a class="card" href="./programs/">
+</div>
 
-<h2>🚀 Programs</h2>
+</div>
 
-<p>
-Business systems, partner programs, and execution engines.
-</p>
-
-<span class="badge">SYSTEMS</span>
-
-</a>
-
-<a class="card" href="./partners/">
-
-<h2>🤝 Partners</h2>
-
-<p>
-Strategic partners, referrals, collaborations, and affiliates.
-</p>
-
-<span class="badge">NETWORK</span>
-
-</a>
-
-<a class="card" href="./brokers/">
-
-<h2>🏦 Brokers</h2>
-
-<p>
-Loan officers, lenders, brokers, and funding relationships.
-</p>
-
-<span class="badge">FUNDING</span>
-
-</a>
-
-<a class="card" href="./calculators/">
-
-<h2>🧠 Calculators</h2>
-
-<p>
-MAO, rehab, overage, seller finance, and profit calculators.
-</p>
-
-<span class="badge">TOOLS</span>
-
-</a>
-
-<a class="card" href="./docs/">
-
-<h2>📂 Docs</h2>
-
-<p>
-PDFs, uploads, downloadable files, and internal documentation.
-</p>
-
-<span class="badge">FILES</span>
-
-</a>
-
-<a class="card" href="./affiliates/">
-
-<h2>🔗 Affiliates</h2>
-
-<p>
-Affiliate programs, commissions, referral systems, and links.
-</p>
-
-<span class="badge">INCOME</span>
-
-</a>
-
-<a class="card" href="./ai-future/">
+<div class="card">
 
 <h2>🤖 AI Future</h2>
 
 <p>
-AI systems, robotics, automation, and future technology ideas.
+Humanoid robots,
+automation systems,
+AI infrastructure,
+future business systems,
+and robotics expansion.
 </p>
 
-<span class="badge">FUTURE</span>
+<div class="card-buttons">
+
+<a class="open-btn"
+href="./ai-future/">
+
+EXPLORE
 
 </a>
 
-<a class="card" href="./assets/">
+<a class="download-btn"
+href="./assets/">
 
-<h2>🎨 Assets</h2>
-
-<p>
-Graphics, logos, banners, branding, and media resources.
-</p>
-
-<span class="badge">MEDIA</span>
+MEDIA
 
 </a>
 
-<a class="card" href="./images/">
+</div>
 
-<h2>🖼 Images</h2>
+</div>
 
-<p>
-Photos, renders, project images, and visual content storage.
-</p>
+</div>
 
-<span class="badge">GALLERY</span>
+<!-- WATCHLIST -->
 
-</a>
+<div class="watchlist">
 
-<a class="card" href="./audios/">
+<h2>📊 Live Watchlist</h2>
 
-<h2>🎵 Audios</h2>
+<div class="tickers">
 
-<p>
-Voice recordings, music, background audio, and sound assets.
-</p>
+<div class="ticker">SPY</div>
+<div class="ticker">QQQ</div>
+<div class="ticker">NVDA</div>
+<div class="ticker">TSLA</div>
+<div class="ticker">PLTR</div>
+<div class="ticker">SOFI</div>
+<div class="ticker">META</div>
+<div class="ticker">AAPL</div>
+<div class="ticker">AMZN</div>
+<div class="ticker">MSFT</div>
+<div class="ticker">RKLB</div>
+<div class="ticker">SPX</div>
 
-<span class="badge">SOUND</span>
-
-</a>
+</div>
 
 </div>
 
@@ -278,11 +768,10 @@ Voice recordings, music, background audio, and sound assets.
 
 <div class="footer">
 
-<p>
-RO'Lyfe Holdings LLC © 2026 | Built For Execution
-</p>
+RO'Lyfe Holdings LLC © 2026
+| Built For Execution
 
 </div>
 
 </body>
-</html>
+  </html>
