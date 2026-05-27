@@ -240,6 +240,196 @@ placeholder="Add lender notes, contractor notes, roof comments, access instructi
 RO'Lyfe Holdings LLC © 2026 | Rehab Execution System
 </div>
 
+<script>
 
+const rehabItems = [
 
-  
+[264,"Architect"],
+[160,"Asphalt & Paving"],
+[848,"Basement"],
+[740,"Bathroom Accessories / Mirror"],
+[840,"Bathroom Tile"],
+[550,"Bathroom Vanity & Countertop"],
+[352,"Carpentry Rough"],
+[700,"Carpets"],
+[418,"Ceiling Work"],
+[384,"Demolition"],
+[704,"Drywall / Sheetrock"],
+[213,"Dumpster"],
+[672,"Electrical Finish"],
+[680,"Electrical Rough"],
+[600,"Exterior Doors"],
+[706,"Exterior Painting"],
+[710,"Flooring"],
+[650,"HVAC"],
+[576,"Insulation"],
+[712,"Interior Painting"],
+[842,"Kitchen"],
+[770,"Kitchen Appliances"],
+[530,"Kitchen Cabinets"],
+[702,"Kitchen Counter Tops"],
+[398,"Landscaping"],
+[646,"Light Fixtures"],
+[466,"Masonry"],
+[186,"Permit Fees"],
+[642,"Plumbing Finish"],
+[654,"Plumbing Rough"],
+[582,"Roofing"],
+[552,"Siding"],
+[614,"Sinks / Toilets / Tubs"],
+[510,"Structural"],
+[412,"Water Heater"],
+[618,"Windows"]
+
+];
+
+const rehabTable =
+document.getElementById("rehabTable");
+
+rehabItems.forEach(item=>{
+
+rehabTable.innerHTML += `
+
+<tr>
+
+<td>${item[0]}</td>
+
+<td>${item[1]}</td>
+
+<td>
+<input
+class="costInput"
+type="number"
+placeholder="0">
+</td>
+
+<td>
+<textarea
+placeholder="Scope notes..."></textarea>
+</td>
+
+</tr>
+
+`;
+
+});
+
+function money(x){
+
+return "$" +
+Number(x || 0).toLocaleString(undefined,{
+
+minimumFractionDigits:2,
+maximumFractionDigits:2
+
+});
+
+}
+
+function calculateRehab(){
+
+let subtotal = 0;
+
+document
+.querySelectorAll(".costInput")
+.forEach(input=>{
+
+subtotal += Number(input.value || 0);
+
+});
+
+const contingencyPercent =
+Number(
+document.getElementById("contingency").value || 0
+);
+
+const buffer =
+Number(
+document.getElementById("buffer").value || 0
+);
+
+const contingencyAmount =
+subtotal * (contingencyPercent / 100);
+
+const finalRehab =
+subtotal + contingencyAmount + buffer;
+
+const arv =
+Number(
+document.getElementById("arv").value || 0
+);
+
+const purchase =
+Number(
+document.getElementById("purchase").value || 0
+);
+
+const spread =
+arv - purchase - finalRehab;
+
+document.getElementById("subtotal")
+.innerText = money(subtotal);
+
+document.getElementById("contingencyTotal")
+.innerText = money(contingencyAmount);
+
+document.getElementById("finalRehab")
+.innerText = money(finalRehab);
+
+document.getElementById("spread")
+.innerText = money(spread);
+
+}
+
+function resetRehab(){
+
+document
+.querySelectorAll(".costInput")
+.forEach(input=>{
+
+input.value = "";
+
+});
+
+document
+.querySelectorAll("textarea")
+.forEach(t=>{
+
+t.value = "";
+
+});
+
+document.getElementById("buffer").value = 0;
+
+calculateRehab();
+
+}
+
+document.addEventListener("input", function(e){
+
+if(
+
+e.target.classList.contains("costInput") ||
+
+e.target.id === "arv" ||
+
+e.target.id === "purchase" ||
+
+e.target.id === "contingency" ||
+
+e.target.id === "buffer"
+
+){
+
+calculateRehab();
+
+}
+
+});
+
+calculateRehab();
+
+</script>
+
+</body>
+  </html>
